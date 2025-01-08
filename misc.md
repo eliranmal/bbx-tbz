@@ -7,9 +7,9 @@
 <br/>
 
 
-### pharrell & snoop dogg / drop it like it’s hot
+## pharrell & snoop dogg / drop it like it’s hot
 
-**92 BPM**
+### 92 BPM
 
 _intro_
 ```
