@@ -6,5 +6,4 @@
 
 
 [1]: ./misc.html
-
-[11]: ./ltbb-day-1.html
+[11]: ./ltbb/day-1.html
