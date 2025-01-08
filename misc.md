@@ -1,7 +1,7 @@
 <!-- this first element fools the Tactile theme to avoid presenting the first heading on the page in the site header -->
 <br/>
 
-# miscellaneous
+# miscellaneous beats
 
 <br/>
 <br/>
