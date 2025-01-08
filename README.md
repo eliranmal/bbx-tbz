@@ -1,9 +1,9 @@
 
-- [misc][1]
+- [miscellaneous][1]
 - 'learn to beatbox' course practices
   - [day 1][11]
 
 
 
-[1]: ./misc.html
-[11]: ./ltbb/day-1.html
+[1]: ./misc/
+[11]: ./ltbb/day-1/
