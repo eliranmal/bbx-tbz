@@ -2,23 +2,24 @@
 
 # miscellaneous
 
----
-
 ### pharrell & snoop dogg / drop it like it’s hot
 
-###### 92 BPM
+**_92 BPM_**
 
+_intro_
 ```
 b--bb--bb--bb---
 ```
 
+_A_
 ```
-----s-------S---
+----s-------s---
 b--b--b---b-----
 ```
 
+_B_
 ```
 --l--l--l--l----
-----s-------S---
+----s-------s---
 b--b--b---b-----
 ```
