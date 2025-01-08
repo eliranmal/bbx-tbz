@@ -1,6 +1,10 @@
+<!-- this first element fools the Tactile theme to avoid presenting the first heading on the page in the site header -->
 <br/>
 
 # miscellaneous
+
+<br/>
+<br/>
 
 
 ### pharrell & snoop dogg / drop it like it’s hot
