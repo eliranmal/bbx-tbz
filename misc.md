@@ -4,7 +4,7 @@
 
 ### pharrell & snoop dogg / drop it like it’s hot
 
-**_92 BPM_**
+**92 BPM**
 
 _intro_
 ```
