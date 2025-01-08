@@ -1,5 +1,5 @@
 
-## miscellaneous
+_miscellaneous_
 
 ### pharrell & snoop dogg / drop it like it’s hot
 
