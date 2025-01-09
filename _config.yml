@@ -2,8 +2,6 @@ title: BBX TABZ
 description: various beats & breaks, transcribed as beatbox tablature
 theme: jekyll-theme-tactile
 permalink: pretty
-titles_from_headings:
-  enabled: false
 collections:
   tabs:
     output: true
