@@ -1,6 +1,6 @@
 ---
 layout: default
-title: null
+title: ''
 ---
 
 # day 1
