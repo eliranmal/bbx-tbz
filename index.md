@@ -1,15 +1,4 @@
 
-tabs:
-
-{% for tab in site.tabs %}
-<h2>
-<a href="{{ site.baseurl }}{{ tab.url }}">
-{{ tab.title }}
-</a>
-</h2>
-  <p>{{ tab.content | markdownify }}</p>
-{% endfor %}
-
 - songs
   - [pharrell / drop it like it's hot][1]
   - [rhazel / if your mother only knew][2]
@@ -19,6 +8,17 @@ tabs:
   - [day 2][ltbb-2]
   - [day 3][ltbb-3]
 
+
+collection test:
+
+{% for tab in site.tabs %}
+<h2>
+<a href="{{ site.baseurl }}{{ tab.url }}">
+{{ tab.title }}
+</a>
+</h2>
+  <p>{{ tab.content | markdownify }}</p>
+{% endfor %}
 
 
 [1]: ./_tabs/songs/pharrell/drop-it-like-its-hot/
