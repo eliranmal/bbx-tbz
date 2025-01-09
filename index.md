@@ -10,15 +10,16 @@
 
 
 collection test:
-
-{% for tab in site.tabs %}
-<h2>
-<a href="{{ site.baseurl }}{{ tab.url }}">
-{{ tab.title }}
-</a>
-</h2>
-  <p>{{ tab.content | markdownify }}</p>
-{% endfor %}
+    
+<ul>
+  {% for tab in site.tabs %}
+  <li>
+    <a href="{{ site.baseurl }}{{ tab.url }}">
+    {{ tab.path }} - {{ tab.relative_path }} - {{ tab.title }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
 
 
 [1]: ./_tabs/songs/pharrell/drop-it-like-its-hot/
