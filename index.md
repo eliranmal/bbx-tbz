@@ -15,7 +15,7 @@
   {% for page in site.songs %}
   <li>
     <a href="{{ site.baseurl }}{{ page.url }}">
-    {{ page.path }} - {{ page.relative_path }} - {{ page.title }}
+    {{ page.title }}
     </a>
   </li>
   {% endfor %}
