@@ -4,7 +4,7 @@ tabs:
 {% for tab in site.tabs %}
 <h2>
 <a href="{{ tab.url }}">
-{{ tab.url }}
+{{ tab.path }}
 </a>
 </h2>
   <p>{{ tab.content | markdownify }}</p>
