@@ -1,4 +1,6 @@
-<!-- this comment fools Tactile theme to avoid presenting the first heading on the page in the site header -->
+---
+layout: page
+---
 
 # rhazel / if ya mother
 
