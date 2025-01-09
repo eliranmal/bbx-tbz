@@ -10,9 +10,9 @@
 
 
 
-[1]: ./songs/pharrell/drop-it-like-its-hot/
-[2]: ./songs/rhazel/if-your-mother-only-knew/
+[1]: ./tabs/songs/pharrell/drop-it-like-its-hot/
+[2]: ./tabs/songs/rhazel/if-your-mother-only-knew/
 
-[ltbb-1]: ./ltbb/day-1/
-[ltbb-2]: ./ltbb/day-2/
-[ltbb-3]: ./ltbb/day-3/
+[ltbb-1]: ./tabs/ltbb/day-1/
+[ltbb-2]: ./tabs/ltbb/day-2/
+[ltbb-3]: ./tabs/ltbb/day-3/
