@@ -1,7 +1,7 @@
 
 - songs
-  - [pharrell / drop-it-like-its-hot][1]
-  - [rhazel / if-your-mother-only-knew][2]
+  - [pharrell / drop it like it's hot][1]
+  - [rhazel / if your mother only knew][2]
 
 - 'learn to beatbox' course practices
   - [day 1][ltbb-1]
