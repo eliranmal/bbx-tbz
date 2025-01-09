@@ -1,9 +1,0 @@
-<ul>
-    {% for page in {{ include.content }} %}
-    <li>
-        <a href="{{ site.baseurl }}{{ page.url }}">
-            {{ page.path }} - {{ page.relative_path }} - {{ page.title }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
