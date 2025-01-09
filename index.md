@@ -9,17 +9,18 @@
   - [day 3][ltbb-3]
 
 
-collection test:
+### songs
     
 <ul>
-  {% for tab in site.tabs %}
+  {% for page in site.songs %}
   <li>
-    <a href="{{ site.baseurl }}{{ tab.url }}">
-    {{ tab.path }} - {{ tab.relative_path }} - {{ tab.title }}
+    <a href="{{ site.baseurl }}{{ page.url }}">
+    {{ page.path }} - {{ page.relative_path }} - {{ page.title }}
     </a>
   </li>
   {% endfor %}
 </ul>
+
 
 
 [1]: songs/pharrell/drop-it-like-its-hot/
