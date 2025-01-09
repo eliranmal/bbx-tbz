@@ -1,5 +1,7 @@
 
-### songs
+# table of contents
+
+## songs
 
 <ul>
   {% for page in site.songs %}
@@ -12,7 +14,7 @@
 </ul>
 
 
-### breaks
+## breaks
 
 <ul>
   {% for page in site.breaks %}
@@ -25,7 +27,7 @@
 </ul>
 
 
-### 'learn to beatbox' course practices
+## 'learn to beatbox' course practices
 
 <ul>
   {% for page in site.ltbb %}
