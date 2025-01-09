@@ -1,4 +1,4 @@
-<!-- this first element fools the Tactile theme to avoid presenting the first heading on the page in the site header -->
+<!-- this comment fools Tactile theme to avoid presenting the first heading on the page in the site header -->
 
 # miscellaneous beats
 
