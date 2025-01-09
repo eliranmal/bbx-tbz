@@ -22,9 +22,9 @@ collection test:
 </ul>
 
 
-[1]: ./_tabs/songs/pharrell/drop-it-like-its-hot/
-[2]: ./_tabs/songs/rhazel/if-your-mother-only-knew/
+[1]: songs/pharrell/drop-it-like-its-hot/
+[2]: songs/rhazel/if-your-mother-only-knew/
 
-[ltbb-1]: ./_tabs/ltbb/day-1/
-[ltbb-2]: ./_tabs/ltbb/day-2/
-[ltbb-3]: ./_tabs/ltbb/day-3/
+[ltbb-1]: ltbb/day-1/
+[ltbb-2]: ltbb/day-2/
+[ltbb-3]: ltbb/day-3/
