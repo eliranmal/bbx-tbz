@@ -1,6 +1,6 @@
 ---
 title: day-1
-layout: default
+layout: page
 ---
 
 # day 1
