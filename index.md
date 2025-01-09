@@ -10,16 +10,12 @@
 
 
 ### songs
-    
-<ul>
-  {% for page in site.songs %}
-  <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
-    {{ page.path }} - {{ page.relative_path }} - {{ page.title }}
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+
+{% capture tab_collection %}
+{{ site.songs }}
+{% endcapture %}
+
+{% include collection-toc.html content=tab_collection %}
 
 
 
