@@ -1,6 +1,5 @@
 ---
-layout: default
-title: ''
+layout: page
 ---
 
 # day 1
