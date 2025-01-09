@@ -1,4 +1,15 @@
 
+tabs:
+
+{% for tab in site.tabs %}
+<h2>
+<a href="{{ tab.url }}">
+{{ tab.title }}
+</a>
+</h2>
+  <p>{{ tab.content | markdownify }}</p>
+{% endfor %}
+
 - songs
   - [pharrell / drop it like it's hot][1]
   - [rhazel / if your mother only knew][2]
