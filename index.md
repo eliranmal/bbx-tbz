@@ -6,7 +6,7 @@
 <ul>
   {% for page in site.songs %}
   <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
+    <a href="{{ page.url }}">
     {{ page.title }}
     </a>
   </li>
@@ -19,7 +19,7 @@
 <ul>
   {% for page in site.breaks %}
   <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
+    <a href="{{ page.url }}">
     {{ page.title }}
     </a>
   </li>
@@ -32,7 +32,7 @@
 <ul>
   {% for page in site.ltbb %}
   <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
+    <a href="{{ page.url }}">
     {{ page.title }}
     </a>
   </li>
