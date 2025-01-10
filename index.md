@@ -27,7 +27,7 @@
 </ul>
 
 
-## 'learn to beatbox' course practices
+## bellatrix's "learn to beatbox" course practices
 
 <ul>
   {% for page in site.ltbb %}
