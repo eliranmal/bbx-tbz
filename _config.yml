@@ -1,7 +1,23 @@
+
+### site meta
+
 title: BBX TBZ 🎤🥁🎵
 description: various beats & breaks, transcribed as tablature for beatboxing
-theme: jekyll-theme-minimal
+author: eliran malka
+
+
+### host settings
+
+# omitting http:// at the start forces HTTPS
+domain: eliranmal.github.io
+url: https://eliranmal.github.io
+baseurl: /bbx-tbz
 permalink: pretty
+
+
+### site structure
+
+# hides project related elements
 github:
   is_project_page: false
 collections:
@@ -11,3 +27,12 @@ collections:
     output: true
   ltbb:
     output: true
+
+
+### build settings
+
+theme: jekyll-theme-minimal
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
