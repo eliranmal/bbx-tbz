@@ -17,9 +17,6 @@ permalink: pretty
 
 ### site structure
 
-# hides project related elements
-github:
-  is_project_page: false
 collections:
   songs:
     output: true
