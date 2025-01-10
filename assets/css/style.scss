@@ -10,3 +10,13 @@ body {
 a, a:hover, a:focus {
   color: hotpink;
 }
+
+h1 {
+  text-transform: uppercase;
+}
+
+header p {
+  font-variant: all-small-caps;
+  font-size: 1.2em;
+  line-height: 1.2;
+}
