@@ -4,6 +4,7 @@
 @import "{{ site.theme }}";
 
 body {
+  font-size: 15px;
   background-color: #f2f2f2;
 }
 
@@ -13,6 +14,9 @@ a, a:hover, a:focus {
 
 h1 {
   text-transform: uppercase;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #444;
 }
 
 header p {
