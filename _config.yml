@@ -20,10 +20,16 @@ permalink: pretty
 collections:
   songs:
     output: true
+    index: 1
   breaks:
     output: true
+    index: 2
+    title: beats & breaks
   ltbb:
     output: true
+    index: 3
+    title: practice beats
+    description: from bellatrix's 'learn to beatbox' course
 
 
 ### build settings

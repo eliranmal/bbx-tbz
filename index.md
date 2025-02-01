@@ -3,41 +3,29 @@
 
 # table of contents
 
-## songs
+{% assign collections = site.collections | sort: 'index' %}
+{% for collection in collections %}
+{% if collection.label == 'posts' %}
+  {% continue %}
+{% endif %}
+
+{% if collection.title %}
+## {{ collection.title }}
+{% else %}
+## {{ collection.label }}
+{% endif %}
+
+{% if collection.description %}
+{{ collection.description }}
+{% endif %}
 
 <ul>
-  {% for page in site.songs %}
+  {% for page in collection.docs %}
   <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
-    {{ page.title }}
+    <a href="{{ page.url | relative_url }}">
+    {{ page.path | split: '/' | shift | join: ' / ' | replace: '-', ' ' | remove: page.ext }}
     </a>
   </li>
   {% endfor %}
 </ul>
-
-
-## breaks
-
-<ul>
-  {% for page in site.breaks %}
-  <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
-    {{ page.title }}
-    </a>
-  </li>
-  {% endfor %}
-</ul>
-
-
-## bellatrix's "learn to beatbox" course practices
-
-<ul>
-  {% for page in site.ltbb %}
-  <li>
-    <a href="{{ site.baseurl }}{{ page.url }}">
-    {{ page.title }}
-    </a>
-  </li>
-  {% endfor %}
-</ul>
-
+{% endfor %}
