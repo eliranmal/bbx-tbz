@@ -17,14 +17,22 @@ a, a:hover, a:focus {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1em;
   font-weight: 400;
+  color: #888;
+}
+
+h1, h2 {
+  font-weight: 900;
   color: #444;
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight: 900;
   text-transform: uppercase;
+}
+
+h3 {
+  font-style: italic;
 }
 
 // bring details headings (tempo and grid resolution) closer together
