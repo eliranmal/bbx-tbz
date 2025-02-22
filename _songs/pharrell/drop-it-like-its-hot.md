@@ -4,7 +4,8 @@ layout: page
 
 # pharrell & snoop dogg / drop it like it’s hot
 
-### 92 BPM <br/> `-` = 1/16
+#### 92 BPM
+#### `-` = 1/16
 
 _intro_
 ```

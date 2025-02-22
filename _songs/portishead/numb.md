@@ -4,7 +4,8 @@ layout: page
 
 # numb / portishead
 
-#### ~78 BPM (heavy swing) <br/> `-` = 1/16
+#### ~78 BPM (heavy swing)
+#### `-` = 1/16
 
 ```
 |--z---s---s---s-|------s-------s-|--z---s---s---s-|------s-------s-|

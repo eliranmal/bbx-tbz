@@ -4,7 +4,8 @@ layout: page
 
 # michael jackson / beat it
 
-#### 132 BPM <br/> `-` = 1/8
+#### 132 BPM
+#### `-` = 1/8
 
 ```
 |-t-t-t-t|-t-tt--t|

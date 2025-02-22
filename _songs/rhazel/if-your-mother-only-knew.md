@@ -4,7 +4,8 @@ layout: page
 
 # rhazel / if ya mother
 
-### 96 BPM (heavy swing) <br/> `-` = 1/16
+#### 96 BPM (heavy swing)
+#### `-` = 1/16
 
 ```
 |--t---t-------t-|--t---t-------t-|
