@@ -36,3 +36,10 @@ header p {
 footer, header .view {
   display: none;
 }
+
+dl {
+  dt {
+    float: left;
+    clear: left;
+  }
+}
