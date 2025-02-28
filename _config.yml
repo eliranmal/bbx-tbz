@@ -28,8 +28,8 @@ collections:
   ltbb:
     output: true
     index: 3
-    title: practice beats
-    description: from bellatrix's 'learn to beatbox' course
+    title: beatbox in 4 weeks
+    description: practice beats from bellatrix's course
 
 
 ### build settings
