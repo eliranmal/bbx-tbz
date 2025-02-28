@@ -57,11 +57,15 @@ dl {
   }
 }
 
+pre, button {
+  border: .05rem solid #888;
+  border-radius: 0;
+}
+
 button {
   margin: 0;
   padding: .8em;
   outline: none;
-  border: .1em solid #888;
   background: #fff none;
   cursor: pointer;
 }
