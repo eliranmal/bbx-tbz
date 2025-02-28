@@ -37,10 +37,3 @@ layout: tab
     <dt><code>t</code></dt><dd>blow in / off beat</dd>
     <dt><code>k</code></dt><dd>flat/front/sides k-snare</dd>
 </dl>
-
-
-
-
-
-
-
