@@ -67,6 +67,17 @@ pre, button {
   border-radius: 0;
 }
 
+pre, .highlight {
+  background-color: transparent;
+}
+
+pre {
+  border-inline-end-width: 0;
+  border-block-end-width: 0;
+  border-block-start-width: 0;
+  background: transparent linear-gradient(90deg, #fff, transparent);
+}
+
 button {
   margin: 0;
   padding: .8em;
