@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # pharrell & snoop dogg / drop it like it’s hot

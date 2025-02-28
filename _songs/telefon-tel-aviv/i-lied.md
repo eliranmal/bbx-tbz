@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # telefon tel aviv / i lied

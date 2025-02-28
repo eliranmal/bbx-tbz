@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # cinematic orchestra / channel 1 suite

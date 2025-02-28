@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # day 3

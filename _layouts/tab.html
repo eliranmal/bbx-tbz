@@ -1,0 +1,42 @@
+---
+layout: page
+---
+
+{{ content }}
+
+<button id="tab-format-toggle-button">^ / v</button>
+
+<script>
+    function splitLines(rawText) {
+        return rawText.split('\n').filter(Boolean)
+    }
+
+    function compactifyTabs(rawTabs, blankChar = '-') {
+        const rows = splitLines(rawTabs)
+
+        const columnIndexes = [...Array(rows[0].length).keys()]
+
+        return columnIndexes.map(colIndex => (
+            rows.reduce((accum, row) => (
+                row[colIndex] !== blankChar ? row[colIndex] : accum
+            ), blankChar)
+        )).join('')
+    }
+
+    function togglePageTabsFormat() {
+        const preEls = [...document.querySelectorAll('pre')]
+        preEls.map(pre => {
+            if (splitLines(pre.textContent).length > 1) {
+                pre.setAttribute('data-initial-content', pre.textContent)
+                pre.textContent = compactifyTabs(pre.textContent)
+            } else {
+                if (pre.hasAttribute('data-initial-content')) {
+                    pre.textContent = pre.getAttribute('data-initial-content');
+                    pre.removeAttribute('data-initial-content')
+                }
+            }
+        })
+    }
+
+    document.querySelector('#tab-format-toggle-button').addEventListener('click', togglePageTabsFormat)
+</script>

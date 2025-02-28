@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # fiona apple / fast as you can

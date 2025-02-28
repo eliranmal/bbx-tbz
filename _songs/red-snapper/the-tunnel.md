@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # red snapper / the tunnel

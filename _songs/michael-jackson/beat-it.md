@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: tab
 ---
 
 # michael jackson / beat it

@@ -56,3 +56,23 @@ dl {
     clear: left;
   }
 }
+
+button {
+  margin: 0;
+  padding: .8em;
+  outline: none;
+  border: .1em solid #888;
+  background: #fff none;
+  cursor: pointer;
+}
+
+#tab-format-toggle-button {
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+  display: block;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+}
