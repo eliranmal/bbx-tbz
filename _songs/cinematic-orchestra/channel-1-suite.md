@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# cinematic orchestra / channel 1 suite
+# channel 1 suite
+## cinematic orchestra
 
 #### 86-87 BPM
 #### `-` = 1/32

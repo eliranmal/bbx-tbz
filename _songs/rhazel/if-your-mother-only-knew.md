@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# rhazel / if ya mother
+# if ya mother
+## rhazel
 
 #### 96 BPM (heavy swing)
 #### `-` = 1/16

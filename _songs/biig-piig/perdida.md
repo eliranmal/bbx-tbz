@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# biig piig / perdida
+# perdida
+## biig piig
 
 #### ~76.5 BPM (swing)
 #### `-` = 1/16

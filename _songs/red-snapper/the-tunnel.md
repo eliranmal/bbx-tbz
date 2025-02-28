@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# red snapper / the tunnel
+# the tunnel
+## red snapper
 
 #### ~144 BPM
 #### `-` = 1/16

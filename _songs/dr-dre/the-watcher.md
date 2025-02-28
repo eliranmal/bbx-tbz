@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# dr. dre / the watcher
+# the watcher
+## dr. dre
 
 #### 97.5 BPM
 #### `-` = 1/8

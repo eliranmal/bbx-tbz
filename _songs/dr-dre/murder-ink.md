@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# dr. dre / murder ink
+# murder ink
+## dr. dre
 
 #### 88.5 BPM
 #### `-` = 1/16

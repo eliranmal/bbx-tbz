@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# pharrell & snoop dogg / drop it like it’s hot
+# drop it like it’s hot
+## pharrell & snoop dogg
 
 #### 92 BPM
 #### `-` = 1/16

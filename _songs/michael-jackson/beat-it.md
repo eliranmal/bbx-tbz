@@ -2,7 +2,8 @@
 layout: tab
 ---
 
-# michael jackson / beat it
+# beat it
+## michael jackson
 
 #### 132 BPM
 #### `-` = 1/8
