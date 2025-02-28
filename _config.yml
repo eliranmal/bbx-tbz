@@ -29,7 +29,7 @@ collections:
     output: true
     index: 3
     title: beatbox in 4 weeks
-    description: practice beats from bellatrix's course
+    description: practice beats from the [course](https://www.learn-to-beatbox.com/) by [bellatrix](https://www.bellatrixmusic.co.uk/about)
 
 
 ### build settings
