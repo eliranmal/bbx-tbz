@@ -2,8 +2,8 @@
 layout: tab
 ---
 
-# beats! - level 2
-## day 2 
+# beats! - all
+## day 3 
 
 #### 65 BPM
 #### `-` = 1/16

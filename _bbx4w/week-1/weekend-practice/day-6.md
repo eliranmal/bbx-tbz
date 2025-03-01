@@ -3,7 +3,7 @@ layout: tab
 ---
 
 # day 6
-## day 6
+## weekend practice
 
 #### 57 BPM
 #### `-` = 1/16
