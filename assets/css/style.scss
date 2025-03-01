@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 html {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 body {
@@ -48,13 +48,13 @@ h3 {
 }
 
 h4, h4 > * {
+  font-variant: all-small-caps;
   color: #bbb;
 }
 
 
 header p {
   font-variant: all-small-caps;
-  font-size: 1.2em;
   line-height: 1.2;
 }
 
