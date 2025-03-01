@@ -5,7 +5,7 @@ date: 0000-01-05 01:00:00
 ---
 
 # day 5
-## weekend practice
+## 1st weekend
 
 #### 54 BPM
 #### `-` = 1/16
