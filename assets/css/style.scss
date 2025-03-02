@@ -61,8 +61,10 @@ header {
     font-size: 4em;
 
     // emojis watermark
-    p {
-      margin: -.2em auto;
+    &:after {
+      content: '🎤🥁🎵';
+      display: block;
+      line-height: .45;
       font-size: 1.35em;
       filter: grayscale(1);
       opacity: .15;
