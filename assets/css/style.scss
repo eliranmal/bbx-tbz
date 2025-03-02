@@ -52,10 +52,28 @@ h4, h4 > * {
   color: #aaa;
 }
 
+header {
+  text-align: end;
 
-header p {
-  font-variant: all-small-caps;
-  line-height: 1.2;
+  // site title
+  h1 {
+    line-height: .85;
+    font-size: 4em;
+
+    // emojis watermark
+    p {
+      margin: -.2em auto;
+      font-size: 1.35em;
+      filter: grayscale(1);
+      opacity: .15;
+    }
+  }
+
+  // site description
+  > p {
+    line-height: 1.2;
+    font-variant: all-small-caps;
+  }
 }
 
 footer, header .view {
@@ -115,5 +133,13 @@ button {
   // bring details headings (tempo and grid resolution) closer together
   h4 + h4 {
     margin-top: -.5em;
+  }
+}
+
+
+// overrides unnecessary rule from theme stylesheet
+@media print, screen and (max-width: 960px) {
+  header {
+    padding-right: 0;
   }
 }
