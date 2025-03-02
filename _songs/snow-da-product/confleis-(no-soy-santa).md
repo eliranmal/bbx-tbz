@@ -6,7 +6,7 @@ layout: tab
 ## snow da product
 
 #### 96 BPM
-#### `-` = 1/8
+#### `-` = 1/16
 
 <br/>
                                    
