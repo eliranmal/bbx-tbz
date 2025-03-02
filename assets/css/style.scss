@@ -61,7 +61,7 @@ header {
     font-size: 4em;
 
     // emojis watermark
-    &:after {
+    a:after {
       content: '🎤🥁🎵';
       display: block;
       line-height: .45;
