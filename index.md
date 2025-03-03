@@ -9,11 +9,7 @@
 {%         continue %}
 {%     endif %}
 
-{%     if collection.title %}
-## {{ collection.title }}
-{%     else %}
-## {{ collection.label }}
-{%     endif %}
+## {{  collection.title | default: collection.label }}
 
 {%     if collection.description %}
 {{         collection.description }}
