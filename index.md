@@ -1,19 +1,19 @@
 ---
 ---
 
-# table of contents
-
 {% assign collections = site.collections | sort: 'index' %}
 {% for collection in collections %}
 {%     if collection.label == 'posts' %}
 {%         continue %}
 {%     endif %}
 
-## {{  collection.title | default: collection.label }}
-
+<details>
+<summary>
+<h2>{{  collection.title | default: collection.label }}</h2>
 {%     if collection.description %}
-{{         collection.description }}
+{{         collection.description | markdownify }}
 {%     endif %}
+</summary>
 
 {%     for page in collection.docs %}
 {%         assign path_segments = page.path | split: '/' %}
@@ -26,10 +26,10 @@
 {%         assign page_title = page.title | slugify: 'none' %}
                                  
 {%         if path_segments_size > 2 and path_segments[1] != prev_path_segments[1] %}
-### {{         path_segments[1] | replace: '-', ' ' }}
+<h3>{{         path_segments[1] | replace: '-', ' ' }}</h3>
 {%         endif %}
 {%         if path_segments_size > 3 and path_segments[2] != prev_path_segments[2] %}
-#### {{         path_segments[2] | replace: '-', ' ' }}
+<h4>{{         path_segments[2] | replace: '-', ' ' }}</h4>
 {%         endif %}
               
 {%         if path_segments_size > 1 and path_prev_segment != prev_path_prev_segment %}
@@ -45,4 +45,5 @@
 {%         endif %}
 
 {%     endfor %}
+</details>
 {% endfor %}

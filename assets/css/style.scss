@@ -105,6 +105,47 @@ pre {
   background-image: linear-gradient(90deg, #fff, transparent);
 }
 
+details {
+  margin-block-end: 1rem;
+
+  > summary {
+    position: relative;
+    padding: .5rem 1rem;
+    margin-inline-start: -1rem;
+    margin-block-end: 1rem;
+    border-inline-start: .1rem solid #c9c9c9;
+    background-image: linear-gradient(90deg, #fff, transparent);
+    cursor: pointer;
+    user-select: none;
+
+    > * {
+      margin-block: 0 .5rem;
+
+      &:last-child {
+        margin-block-end: 0;
+      }
+    }
+
+    &:first-of-type {
+      list-style: none;
+    }
+
+    &:after {
+      content: '\0023f5';
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.25rem;
+      font-size: 1.5rem;
+      color: #c9c9c9;
+
+      @at-root details[open] > summary:after {
+        content: '\0023f7';
+      }
+    }
+  }
+}
+
 button {
   margin: 0;
   padding: .8em;

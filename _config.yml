@@ -21,10 +21,12 @@ collections:
   songs:
     output: true
     index: 1
+    description: beats from songs & tracks
   breaks:
     output: true
     index: 2
     title: beats & breaks
+    description: well-known breaks, my own beats and practice bars, and other random bits and pieces
   bbx4w:
     output: true
     index: 3
