@@ -24,14 +24,14 @@
 {%         assign next_path_prev_segment = next_path_segments | pop | last %}
 {%         assign path_segments_size = path_segments | size %}
 {%         assign page_title = page.title | slugify: 'none' %}
-                                 
+
 {%         if path_segments_size > 2 and path_segments[1] != prev_path_segments[1] %}
 <h3>{{         path_segments[1] | replace: '-', ' ' }}</h3>
 {%         endif %}
 {%         if path_segments_size > 3 and path_segments[2] != prev_path_segments[2] %}
 <h4>{{         path_segments[2] | replace: '-', ' ' }}</h4>
 {%         endif %}
-              
+
 {%         if path_segments_size > 1 and path_prev_segment != prev_path_prev_segment %}
 <ul>
 {%         endif %}
@@ -47,3 +47,18 @@
 {%     endfor %}
 </details>
 {% endfor %}
+
+
+<script>
+    const detailsEls = [...document.querySelectorAll('details')];
+
+    detailsEls.map((detailsEl, index) => {
+        const storageKey = `toc-group-expanded-${index}`;
+        detailsEl.open = +window.localStorage.getItem(storageKey);
+
+        detailsEl.addEventListener('toggle', ({ newState }) => {
+            const isOpen = newState === 'open';
+            window.localStorage.setItem(storageKey, String(+isOpen));
+        });
+    });
+</script>
