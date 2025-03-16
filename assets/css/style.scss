@@ -80,10 +80,6 @@ header {
     line-height: 1.2;
     font-variant: all-small-caps;
   }
-
-  .view {
-    display: none;
-  }
 }
 
 footer {
@@ -97,10 +93,6 @@ footer {
       max-height: calc(100% - 50px);
       overflow-y: auto;
     }
-  }
-
-  p {
-    display: none;
   }
 }
 
