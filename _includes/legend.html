@@ -17,12 +17,12 @@
 
 <!-- filter legend items based on source page contents -->
 <script>
-    const tabsPreEls = [...document.querySelectorAll('{{ include.tabsSourceSelector }} pre')];
+    const tabBoxEls = [...document.querySelectorAll('{{ include.tabsSourceSelector }} pre')];
     // if no tabs were found, do nothing (and don't reveal legend and link)
-    if (tabsPreEls.length) {
+    if (tabBoxEls.length) {
         const tabsNoteSymbols = new Set(
             // collect text from all tab boxes on the page
-            tabsPreEls.map(el => el.textContent)
+            tabBoxEls.map(el => el.textContent)
                 // join all boxes' text to one string, and split it to single characters
                 .join('').split('')
         );
