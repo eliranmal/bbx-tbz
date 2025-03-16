@@ -8,6 +8,7 @@ html {
 }
 
 body {
+  margin: 0;
   font-size: 1rem;
   background-color: #f2f2f2;
 }
@@ -58,7 +59,8 @@ header {
   // site title
   h1 {
     line-height: .85;
-    font-size: 4em;
+    font-size: 4rem;
+    margin-block-end: -.333rem;
 
     // emojis watermark
     a:after {
@@ -67,7 +69,7 @@ header {
       line-height: .45;
       font-size: 1.35em;
       filter: grayscale(1);
-      opacity: .15;
+      opacity: .1;
     }
   }
 
@@ -76,16 +78,36 @@ header {
     line-height: 1.2;
     font-variant: all-small-caps;
   }
+
+  .view {
+    display: none;
+  }
 }
 
-footer, header .view {
-  display: none;
+footer {
+  top: 250px;
+  bottom: 50px;
+
+  dl {
+    min-height: 2rem;
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
+  }
+
+  p {
+    display: none;
+  }
 }
 
 dl {
   dt {
     float: left;
     clear: left;
+
+    code {
+      // fixes accumulating offset in stacked items
+      line-height: 1;
+    }
   }
 }
 
@@ -185,4 +207,9 @@ button {
   header {
     padding-right: 0;
   }
+}
+
+
+.hidden {
+  display: none !important;
 }
