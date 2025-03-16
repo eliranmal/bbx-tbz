@@ -88,12 +88,15 @@ header {
 
 footer {
   top: 250px;
-  bottom: 50px;
 
-  dl {
-    min-height: 2rem;
-    max-height: calc(100% - 50px);
-    overflow-y: auto;
+  div {
+    height: 100%;
+
+    dl {
+      min-height: 2.5em;
+      max-height: calc(100% - 50px);
+      overflow-y: auto;
+    }
   }
 
   p {
