@@ -5,9 +5,23 @@ layout: page
 <div class="tab-wrapper">
 {{ content }}
 
-    <button id="tab-format-toggle-button" title="
+    <div class="action-buttons">
+        <button id="tab-format-toggle-button" title="
 &nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
-">^ / v</button>
+    ">^ / v</button>
+{% unless page.previous.url %}
+    {% assign prevClassName = 'disabled' %}
+{% endunless %}
+{% unless page.next.url %}
+    {% assign nextClassName = 'disabled' %}
+{% endunless %}
+        <a href="{{ page.previous.url | relative_url }}" class="{{ prevClassName }}" title="
+&nbsp;&nbsp;&nbsp;previous&nbsp;&nbsp;&nbsp;
+    ">&lt;-</a>
+        <a href="{{ page.next.url | relative_url }}" class="{{ nextClassName }}" title="
+&nbsp;&nbsp;&nbsp;next&nbsp;&nbsp;&nbsp;
+    ">--&gt;</a>
+    </div>
 </div>
 
 <script>

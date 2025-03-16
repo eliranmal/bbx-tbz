@@ -3,6 +3,8 @@
 
 @import "{{ site.theme }}";
 
+$border-thin: .05rem solid #888;
+
 html {
   font-size: 16px;
 }
@@ -13,8 +15,11 @@ body {
   background-color: #f2f2f2;
 }
 
-a, a:hover, a:focus {
+a, a:hover, a:focus, a:active, button {
   color: hotpink;
+}
+button:hover, button:focus, button:active {
+  font-weight: bold;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -111,19 +116,14 @@ dl {
   }
 }
 
-pre, button {
-  border: .05rem solid #888;
-  border-radius: 0;
-}
-
 pre, .highlight {
   background-color: transparent;
 }
 
 pre {
-  border-inline-end-width: 0;
-  border-block-end-width: 0;
-  border-block-start-width: 0;
+  border: 0 none;
+  border-inline-start: $border-thin;
+  border-radius: 0;
 }
 
 // the code highlighter's 'plaintext' mode (i.e. the default mode)
@@ -145,6 +145,32 @@ pre {
     color: mediumpurple !important;
   }
 }
+
+button {
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.action-buttons {
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+
+  > button, a {
+    display: block;
+    margin-block-start: 1rem;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: $border-thin;
+    line-height: 3rem;
+    text-align: center;
+    background: #fff none;
+  }
+}
+
 
 details {
   margin-block-end: 1rem;
@@ -187,26 +213,6 @@ details {
   }
 }
 
-button {
-  margin: 0;
-  padding: .8em;
-  outline: none;
-  background: #fff none;
-  cursor: pointer;
-}
-
-#tab-format-toggle-button {
-  position: fixed;
-  bottom: 4rem;
-  right: 4rem;
-  display: block;
-  padding: 0;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1.5rem;
-}
-
-
 .tab-wrapper {
   h1 + h2 {
     // bring song title and artist subtitle closer together
@@ -229,6 +235,13 @@ button {
 }
 
 
+// utilities
+
 .hidden {
   display: none !important;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: .5;
 }
