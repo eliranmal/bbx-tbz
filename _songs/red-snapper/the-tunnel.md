@@ -17,7 +17,8 @@ layout: tab
 |u-----u---------|u-----u---------|u-----u---------|u-----u---------|
 ```
 
-## legend
+<br/>
+<br/>
                                                
 <dl>
     <dt><code>s</code></dt><dd>no-attack open hi-hat hit</dd>

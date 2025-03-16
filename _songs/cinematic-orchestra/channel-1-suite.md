@@ -18,7 +18,8 @@ layout: tab
 |b-----b---------------b---b-----|
 ```
 
-## legend
+<br/>
+<br/>
 
 <dl>
     <dt><code>g</code></dt><dd>hi-hat ku (alt hand hit)</dd>

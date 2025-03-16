@@ -16,7 +16,8 @@ layout: tab
 |b-------b-------|b-b-----b-b-----|b-------b-b-----|b-b-----b-b-----|
 ```
 
-## legend
+<br/>
+<br/>
 
 <dl>
     <dt><code>s</code></dt><dd>no-attack open hi-hat</dd>
@@ -24,7 +25,3 @@ layout: tab
     <dt><code>q</code></dt><dd>rimshot (closed inward k-snare, short with very high contact-point)</dd>
     <dt><code>!_</code></dt><dd>reversed <code>_</code></dd>
 </dl>
-
-## notes
-
-- use low-pitched / closed-filter snares

@@ -21,7 +21,9 @@ layout: tab
 |bb-b----|b--b----|
 ```
 
-## notes
+<br/>
+<br/>
 
-- the snare here is ultra short and very punchy (a signature of this album; probably from an Akai MPC 60).  
-  use a hybrid type - a puffy spit-snare with a bit of a p-snare attack!
+<dl>
+    <dt><code>x</code></dt><dd>hybrid between a spit-snare and a p-snare; an ultra short and very punchy puffy-mouth spit-snare with a bit of a p-snare attack</dd>
+</dl>
