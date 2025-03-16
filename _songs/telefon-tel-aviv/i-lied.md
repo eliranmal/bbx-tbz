@@ -32,8 +32,6 @@ layout: tab
 ## legend
 
 <dl>
-    <dt><code>T/t</code></dt><dd>very closed hi-hat</dd>
-    <dt><code>T</code></dt><dd>blow out / on beat</dd>
-    <dt><code>t</code></dt><dd>blow in / off beat</dd>
-    <dt><code>k</code></dt><dd>flat/front/sides k-snare</dd>
+    <dt><code>T/t</code></dt><dd>very closed hi-hat; <code>T</code> is blow out (on beat), and <code>t</code> is blow in (off beat)</dd>
+    <dt><code>k</code></dt><dd>flat/front/sides k-snare (t-type), with a 'fff' sound finish</dd>
 </dl>

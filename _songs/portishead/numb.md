@@ -19,7 +19,8 @@ layout: tab
 ## legend
 
 <dl>
-    <dt><code>z</code></dt><dd>inward open hi-hat</dd>
+    <dt><code>s</code></dt><dd>no-attack open hi-hat</dd>
+    <dt><code>z</code></dt><dd>no-attack inward open hi-hat</dd>
     <dt><code>q</code></dt><dd>rimshot (closed inward k-snare, short with very high contact-point)</dd>
     <dt><code>!_</code></dt><dd>reversed <code>_</code></dd>
 </dl>

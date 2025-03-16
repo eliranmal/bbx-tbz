@@ -20,7 +20,5 @@ layout: tab
 ## legend
                                                
 <dl>
-    <dt><code>s</code></dt><dd>open hi-hat hit</dd>
-    <dt><code>q</code></dt><dd>inward-k</dd>
-    <dt><code>u</code></dt><dd>throat kick</dd>
+    <dt><code>s</code></dt><dd>no-attack open hi-hat hit</dd>
 </dl>
