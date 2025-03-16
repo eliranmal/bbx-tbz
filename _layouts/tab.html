@@ -28,14 +28,14 @@ layout: page
     }
 
     function togglePageTabsFormat() {
-        const preEls = [...document.querySelectorAll('pre')]
-        preEls.map(pre => {
+        const tabsEls = [...document.querySelectorAll('pre > code')]
+        tabsEls.map(pre => {
             if (splitLines(pre.textContent).length > 1) {
-                pre.setAttribute('data-initial-content', pre.textContent)
+                pre.setAttribute('data-initial-content', pre.innerHTML)
                 pre.textContent = compactifyTabs(pre.textContent)
             } else {
                 if (pre.hasAttribute('data-initial-content')) {
-                    pre.textContent = pre.getAttribute('data-initial-content');
+                    pre.innerHTML = pre.getAttribute('data-initial-content');
                     pre.removeAttribute('data-initial-content')
                 }
             }

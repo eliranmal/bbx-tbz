@@ -124,7 +124,26 @@ pre {
   border-inline-end-width: 0;
   border-block-end-width: 0;
   border-block-start-width: 0;
+}
+
+// the code highlighter's 'plaintext' mode (i.e. the default mode)
+// is used by tab boxes
+.language-plaintext pre {
   background-image: linear-gradient(90deg, #fff, transparent);
+}
+
+// the code highlighter's 'brainfuck' mode is used by melody boxes,
+// due to it's simple dom rendering
+// (to utilize a highlight mode suitable for melody boxes, use the 'j' mode)
+.language-brainfuck pre {
+  padding-block: 0;
+  margin-block-end: .5em;
+  border-color: transparent;
+
+  * {
+    font-style: normal !important;
+    color: mediumpurple !important;
+  }
 }
 
 details {
