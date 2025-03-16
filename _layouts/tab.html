@@ -42,15 +42,15 @@ layout: page
     }
 
     function togglePageTabsFormat() {
-        const tabBoxEls = [...document.querySelectorAll('pre')]
-        tabBoxEls.map(pre => {
-            if (splitLines(pre.textContent).length > 1) {
-                pre.setAttribute('data-initial-content', pre.innerHTML)
-                pre.textContent = compactifyTabs(pre.textContent)
+        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')]
+        tabBoxEls.map(el => {
+            if (splitLines(el.textContent).length > 1) {
+                el.setAttribute('data-initial-content', el.innerHTML)
+                el.textContent = compactifyTabs(el.textContent)
             } else {
-                if (pre.hasAttribute('data-initial-content')) {
-                    pre.innerHTML = pre.getAttribute('data-initial-content');
-                    pre.removeAttribute('data-initial-content')
+                if (el.hasAttribute('data-initial-content')) {
+                    el.innerHTML = el.getAttribute('data-initial-content');
+                    el.removeAttribute('data-initial-content')
                 }
             }
         })

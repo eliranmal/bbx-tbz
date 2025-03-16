@@ -1,0 +1,6 @@
+<dl class="{{ include.className }}">
+    {% for entry in site.data.note-symbols %}
+    <dt><code>{{ entry.symbol }}</code></dt>
+    <dd>{{ entry.name }}</dd>
+    {% endfor %}
+</dl>

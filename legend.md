@@ -8,4 +8,4 @@
 <!--                generally noted using uppercase/lowercase letters, tho letter-case might mean something else.-->
 <!--            </p>-->
 
-{% include legend.html %}
+{% include note-symbols.html %}

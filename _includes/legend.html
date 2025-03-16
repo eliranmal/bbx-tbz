@@ -1,41 +1,41 @@
 
-<!-- use 'hidden' to fight the FOUC: initially hide the wrapper, and reveal it after item filtering is done -->
-<!-- use 'dynamic' to distinguish one legend _include from another (that shouldn't be filtered - like in the standalone legend page) -->
-{% if include.tabsSourceSelector %}
-    {% assign dynamicClassName = 'dynamic hidden' %}
-{% endif %}
+<!--
+this _includes filters the legend list items based on the current tab page content.
+'dynamic' classname is used to distinguish dynamically-filtered _include instances
+from those which aren't (a non-dynamic one is in the standalone legend page).
+'hidden' classname is used to fight the FOUC: hide the wrapper initially,
+then reveal it after item filtering is done.
+-->
 
-<dl class="{{ dynamicClassName }}">
-    {% for entry in site.data.note-symbols %}
-    <dt><code>{{ entry.symbol }}</code></dt>
-    <dd>{{ entry.name }}</dd>
-    {% endfor %}
-</dl>
+{% assign dynamic_class_name = 'dynamic-legend' %}
 
-{% if include.tabsSourceSelector %}
-<a class="{{ dynamicClassName }}" href="{{ "legend" | relative_url }}">full legend</a>
+<div class="{{ dynamic_class_name }} hidden">
+    {% include note-symbols.html %}
+    <a href="{{ 'legend' | relative_url }}">full legend</a>
+</div>
 
-<!-- filter legend items based on source page contents -->
 <script>
-    const tabBoxEls = [...document.querySelectorAll('{{ include.tabsSourceSelector }} pre')];
+    // lookup tab boxes in the source page
+    const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')];
     // if no tabs were found, do nothing (and don't reveal legend and link)
     if (tabBoxEls.length) {
         const tabsNoteSymbols = new Set(
-            // collect text from all tab boxes on the page
+            // collect text from all boxes
             tabBoxEls.map(el => el.textContent)
                 // join all boxes' text to one string, and split it to single characters
                 .join('').split('')
         );
-        const legendDtEls = [...document.querySelectorAll('dl.dynamic dt')];
-        const legendDdEls = [...document.querySelectorAll('dl.dynamic dd')];
+        // filter out items already found in the tab-page
+        const legendDtEls = [...document.querySelectorAll('.{{ dynamic_class_name }} dl dt')];
+        const legendDdEls = [...document.querySelectorAll('.{{ dynamic_class_name }} dl dd')];
         legendDtEls.forEach((dtEl, i) => {
             if (!tabsNoteSymbols.has(dtEl.textContent)) {
                 dtEl.classList.add('hidden');
                 legendDdEls[i].classList.add('hidden');
             }
         });
-        const dynamicEls = [...document.querySelectorAll('.dynamic')];
-        dynamicEls.forEach(el => el.classList.remove('hidden'));
+        // reveal the wrapper
+        const wrapperEl = document.querySelector('.{{ dynamic_class_name }}');
+        wrapperEl.classList.remove('hidden');
     }
 </script>
-{% endif %}
