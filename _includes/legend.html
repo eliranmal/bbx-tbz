@@ -1,0 +1,41 @@
+
+<!-- use 'hidden' to fight the FOUC: initially hide the wrapper, and reveal it after item filtering is done -->
+<!-- use 'dynamic' to distinguish one legend _include from another (that shouldn't be filtered - like in the standalone legend page) -->
+{% if include.tabsSourceSelector %}
+    {% assign dynamicClassName = 'dynamic hidden' %}
+{% endif %}
+
+<dl class="{{ dynamicClassName }}">
+    {% for entry in site.data.note-symbols %}
+    <dt><code>{{ entry.symbol }}</code></dt>
+    <dd>{{ entry.name }}</dd>
+    {% endfor %}
+</dl>
+
+{% if include.tabsSourceSelector %}
+<a class="{{ dynamicClassName }}" href="{{ "legend" | relative_url }}">full legend</a>
+
+<!-- filter legend items based on source page contents -->
+<script>
+    const tabsPreEls = [...document.querySelectorAll('{{ include.tabsSourceSelector }} pre')];
+    // if no tabs were found, do nothing (and don't reveal legend and link)
+    if (tabsPreEls.length) {
+        const tabsNoteSymbols = new Set(
+            // collect text from all tab boxes on the page
+            tabsPreEls.map(el => el.textContent)
+                // join all boxes' text to one string, and split it to single characters
+                .join('').split('')
+        );
+        const legendDtEls = [...document.querySelectorAll('dl.dynamic dt')];
+        const legendDdEls = [...document.querySelectorAll('dl.dynamic dd')];
+        legendDtEls.forEach((dtEl, i) => {
+            if (!tabsNoteSymbols.has(dtEl.textContent)) {
+                dtEl.classList.add('hidden');
+                legendDdEls[i].classList.add('hidden');
+            }
+        });
+        const dynamicEls = [...document.querySelectorAll('.dynamic')];
+        dynamicEls.forEach(el => el.classList.remove('hidden'));
+    }
+</script>
+{% endif %}

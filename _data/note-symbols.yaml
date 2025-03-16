@@ -1,0 +1,33 @@
+- symbol: b
+  name: bass-drum
+- symbol: m
+  name: lip-roll kick
+- symbol: u
+  name: throat kick
+- symbol: k
+  name: k-snare
+- symbol: K
+  name: open k-snare
+- symbol: q
+  name: inward k-snare
+- symbol: Q
+  name: open inward k-snare
+- symbol: ^
+  name: rim-shot
+  description: very closed inward k-snare
+- symbol: x
+  name: spit-snare
+- symbol: X
+  name: puffed spit-snare
+- symbol: p
+  name: p-snare
+- symbol: t
+  name: hi-hat
+- symbol: T
+  name: open hi-hat
+- symbol: f
+  name: foot hi-hat
+- symbol: d
+  name: floor tom
+#- symbol: s
+#  name: wat
