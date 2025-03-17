@@ -4,6 +4,7 @@
 @import "{{ site.theme }}";
 
 $border-thin: .05rem solid #888;
+$fade-gradient: linear-gradient(to right, #fff, transparent 66%);
 
 html {
   font-size: 16px;
@@ -115,7 +116,7 @@ pre {
 // the code highlighter's 'plaintext' mode (i.e. the default mode)
 // is used by tab boxes
 .language-plaintext pre {
-  background-image: linear-gradient(90deg, #fff, transparent);
+  background-image: $fade-gradient;
 }
 
 // the code highlighter's 'brainfuck' mode is used by melody boxes,
@@ -170,7 +171,7 @@ details {
     margin-inline-start: -1rem;
     margin-block-end: 1rem;
     border-inline-start: .1rem solid #c9c9c9;
-    background-image: linear-gradient(90deg, #fff, transparent);
+    background-image: $fade-gradient;
     cursor: pointer;
     user-select: none;
 
