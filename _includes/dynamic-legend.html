@@ -7,35 +7,51 @@ from those which aren't (a non-dynamic one is in the standalone legend page).
 then reveal it after item filtering is done.
 -->
 
-{% assign dynamic_class_name = 'dynamic-legend' %}
+{% assign wrapper_classname = 'dynamic-legend' %}
+{% assign tab_page_wrapper_classname = 'tab-wrapper' %}
 
-<div class="{{ dynamic_class_name }} hidden">
+<div class="{{ wrapper_classname }} hidden">
     {% include symbol-definitions.html %}
     <a href="{{ 'legend' | relative_url }}">full legend</a>
 </div>
 
 <script>
-    // lookup tab boxes in the source page
-    const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')];
-    // if no tabs were found, do nothing (and don't reveal legend and link)
-    if (tabBoxEls.length) {
-        const tabsNoteSymbols = new Set(
-            // collect text from all boxes
-            tabBoxEls.map(el => el.textContent)
-                // join all boxes' text to one string, and split it to single characters
-                .join('').split('')
-        );
-        // filter out items already found in the tab-page
-        const legendDtEls = [...document.querySelectorAll('.{{ dynamic_class_name }} dl dt')];
-        const legendDdEls = [...document.querySelectorAll('.{{ dynamic_class_name }} dl dd')];
-        legendDtEls.forEach((dtEl, i) => {
-            if (!tabsNoteSymbols.has(dtEl.textContent)) {
-                dtEl.classList.add('hidden');
-                legendDdEls[i].classList.add('hidden');
-            }
-        });
-        // reveal the wrapper
-        const wrapperEl = document.querySelector('.{{ dynamic_class_name }}');
+    function tokenizeDomContent(elements) {
+        return elements
+            // collect text from all elements
+            .map(el => el.textContent)
+            // join all elements' text to one string
+            .join('')
+            // split it to single characters
+            .split('')
+    }
+
+    // lookup symbols in the tab page tab-boxes, to include them
+    const tabBoxEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} pre')];
+    const tabSymbols = new Set(tokenizeDomContent(tabBoxEls));
+    // lookup symbols in the tab page legend
+    const tabLegendTermEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} dl dt')];
+    const tabLegendSymbols = tokenizeDomContent(tabLegendTermEls);
+
+    // omit any symbol that is already found in the tab page legend
+    tabLegendSymbols.forEach(s => tabSymbols.delete(s));
+
+    // filter out any items that weren't found in tab-boxes,
+    // or were found in the tab page legend
+    const legendTermEls = [...document.querySelectorAll('.{{ wrapper_classname }} dl dt')];
+    const legendDescEls = [...document.querySelectorAll('.{{ wrapper_classname }} dl dd')];
+    const visibleItemsIndexes = legendTermEls.map((dtEl, i) => {
+        if (!tabSymbols.has(dtEl.textContent)) {
+            dtEl.classList.add('hidden');
+            legendDescEls[i].classList.add('hidden');
+        } else {
+            return String(i)
+        }
+    });
+
+    // if not all items were hidden, reveal the wrapper
+    if (visibleItemsIndexes.some(Boolean)) {
+        const wrapperEl = document.querySelector('.{{ wrapper_classname }}');
         wrapperEl.classList.remove('hidden');
     }
 </script>
