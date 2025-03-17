@@ -29,15 +29,12 @@ h1, h2 {
   color: #444;
 }
 
-h1, h4 {
-  font-weight: 900;
-}
-
 h3, h4 {
   margin-bottom: .4em;
 }
 
 h1 {
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -46,11 +43,8 @@ h2 {
   font-weight: 100;
 }
 
-h3 {
+h4 {
   font-style: italic;
-}
-
-h4, h4 > * {
   font-variant: all-small-caps;
   color: #aaa;
 }
@@ -222,10 +216,16 @@ details {
 }
 
 
-// overrides unnecessary rule from theme stylesheet
+// overrides theme rules
+
 @media print, screen and (max-width: 960px) {
   header {
     padding-right: 0;
+  }
+
+  section {
+    padding: 35px 0 0;
+    margin-block-start: 35px;
   }
 }
 
