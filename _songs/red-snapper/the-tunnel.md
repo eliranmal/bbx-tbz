@@ -18,7 +18,6 @@ layout: tab
 ```
 
 <br/>
-<br/>
                                                
 <dl>
     <dt><code>s</code></dt><dd>no-attack open hi-hat hit</dd>

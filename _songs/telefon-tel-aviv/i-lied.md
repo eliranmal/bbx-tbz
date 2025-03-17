@@ -30,7 +30,6 @@ layout: tab
 ```
 
 <br/>
-<br/>
 
 <dl>
     <dt><code>T/t</code></dt><dd>very closed hi-hat; <code>T</code> is blow out (on beat), and <code>t</code> is blow in (off beat)</dd>

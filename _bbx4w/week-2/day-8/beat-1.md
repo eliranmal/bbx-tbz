@@ -19,7 +19,6 @@ date: 0000-01-08 01:00:00
 ```
 
 <br/>
-<br/>
 
 <dl>
     <dt><code>q</code></dt><dd>inward k-snare</dd>

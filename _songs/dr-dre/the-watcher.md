@@ -22,7 +22,6 @@ layout: tab
 ```
 
 <br/>
-<br/>
 
 <dl>
     <dt><code>x</code></dt><dd>hybrid between a spit-snare and a p-snare; an ultra short and very punchy puffy-mouth spit-snare with a bit of a p-snare attack</dd>

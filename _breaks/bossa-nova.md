@@ -49,7 +49,6 @@ layout: tab
 ```
 
 <br/>
-<br/>
 
 <dl>
     <dt><code>v</code></dt><dd>click</dd>
