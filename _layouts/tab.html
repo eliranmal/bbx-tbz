@@ -15,10 +15,10 @@ layout: page
 {% unless page.next.url %}
     {% assign nextClassName = 'disabled' %}
 {% endunless %}
-        <a href="{{ page.previous.url | relative_url }}" class="{{ prevClassName }}" title="
+        <a href="{{ page.previous.url | relative_url }}" id="prev-tab-button" class="{{ prevClassName }}" title="
 &nbsp;&nbsp;&nbsp;previous&nbsp;&nbsp;&nbsp;
     ">&lt;-</a>
-        <a href="{{ page.next.url | relative_url }}" class="{{ nextClassName }}" title="
+        <a href="{{ page.next.url | relative_url }}" id="next-tab-button" class="{{ nextClassName }}" title="
 &nbsp;&nbsp;&nbsp;next&nbsp;&nbsp;&nbsp;
     ">--&gt;</a>
     </div>
@@ -31,7 +31,6 @@ layout: page
 
     function compactifyTabs(rawTabs, blankChar = '-') {
         const rows = splitLines(rawTabs)
-
         const columnIndexes = [...Array(rows[0].length).keys()]
 
         return columnIndexes.map(colIndex => (
@@ -43,6 +42,7 @@ layout: page
 
     function togglePageTabsFormat() {
         const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')]
+
         tabBoxEls.map(el => {
             if (splitLines(el.textContent).length > 1) {
                 el.setAttribute('data-initial-content', el.innerHTML)
@@ -56,5 +56,35 @@ layout: page
         })
     }
 
+    function handleActionButtonKeyboardBindings (e) {
+        const {key, shiftKey} = e;
+
+        if (!shiftKey) {
+            return;
+        }
+        let elSelector;
+        switch (key) {
+            case 'ArrowRight':
+                elSelector = '#next-tab-button';
+                break;
+            case 'ArrowLeft':
+                elSelector = '#prev-tab-button';
+                break;
+            case 'ArrowUp':
+                elSelector = '#tab-format-toggle-button';
+                break;
+            default:
+                return;
+        }
+        const actionBtnEl = document.querySelector(`${elSelector}:not(.disabled)`);
+        if (!actionBtnEl) {
+            return;
+        }
+
+        actionBtnEl.click();
+        e.preventDefault();
+    }
+
     document.querySelector('#tab-format-toggle-button').addEventListener('click', togglePageTabsFormat)
+    document.addEventListener('keydown', handleActionButtonKeyboardBindings)
 </script>
