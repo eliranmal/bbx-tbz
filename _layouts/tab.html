@@ -6,7 +6,7 @@ layout: page
 {{ content }}
 
     <div class="action-buttons">
-        <button id="tab-format-toggle-button" title="
+        <button id="compactify-tab-button" title="
 &nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
     ">^ / v</button>
 {% unless page.previous.url %}
@@ -40,7 +40,7 @@ layout: page
         )).join('')
     }
 
-    function togglePageTabsFormat() {
+    function toggleCompactifyTab() {
         const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')]
 
         tabBoxEls.map(el => {
@@ -71,7 +71,7 @@ layout: page
                 elSelector = '#prev-tab-button';
                 break;
             case 'ArrowUp':
-                elSelector = '#tab-format-toggle-button';
+                elSelector = '#compactify-tab-button';
                 break;
             default:
                 return;
@@ -85,6 +85,6 @@ layout: page
         e.preventDefault();
     }
 
-    document.querySelector('#tab-format-toggle-button').addEventListener('click', togglePageTabsFormat)
+    document.querySelector('#compactify-tab-button').addEventListener('click', toggleCompactifyTab)
     document.addEventListener('keydown', handleActionButtonKeyboardBindings)
 </script>
