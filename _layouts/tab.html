@@ -48,10 +48,8 @@ layout: page
                 el.setAttribute('data-initial-content', el.innerHTML)
                 el.textContent = compactifyTabs(el.textContent)
             } else {
-                if (el.hasAttribute('data-initial-content')) {
-                    el.innerHTML = el.getAttribute('data-initial-content');
-                    el.removeAttribute('data-initial-content')
-                }
+                el.innerHTML = el.getAttribute('data-initial-content');
+                el.removeAttribute('data-initial-content')
             }
         })
     }
