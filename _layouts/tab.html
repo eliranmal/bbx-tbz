@@ -44,7 +44,7 @@ layout: page
         const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')]
 
         tabBoxEls.map(el => {
-            if (splitLines(el.textContent).length > 1) {
+            if (!el.hasAttribute('data-initial-content')) {
                 el.setAttribute('data-initial-content', el.innerHTML)
                 el.textContent = compactifyTabs(el.textContent)
             } else {
