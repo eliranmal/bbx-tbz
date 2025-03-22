@@ -41,7 +41,7 @@ layout: page
     }
 
     function toggleCompactifyTab() {
-        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre')]
+        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper .language-plaintext pre')]
 
         tabBoxEls.map(el => {
             if (!el.hasAttribute('data-initial-content')) {
