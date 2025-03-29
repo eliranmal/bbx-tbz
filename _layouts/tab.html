@@ -6,9 +6,10 @@ layout: page
 {{ content }}
 
     <div class="action-buttons">
-        <button id="compactify-tab-button" title="
-&nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
-    ">^ / v</button>
+        <input id="compactify-tab-button" title="
+    &nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
+" type="checkbox"/>
+        <label for="compactify-tab-button">^ / v</label>
 {% unless page.previous.url %}
     {% assign prevClassName = 'disabled' %}
 {% endunless %}
@@ -17,10 +18,10 @@ layout: page
 {% endunless %}
         <a href="{{ page.previous.url | relative_url }}" id="prev-tab-button" class="{{ prevClassName }}" title="
 &nbsp;&nbsp;&nbsp;previous&nbsp;&nbsp;&nbsp;
-    ">&lt;-</a>
+">&lt;-</a>
         <a href="{{ page.next.url | relative_url }}" id="next-tab-button" class="{{ nextClassName }}" title="
 &nbsp;&nbsp;&nbsp;next&nbsp;&nbsp;&nbsp;
-    ">--&gt;</a>
+">---&gt;</a>
     </div>
 </div>
 
@@ -29,8 +30,8 @@ layout: page
         return rawText.split('\n').filter(Boolean)
     }
 
-    function compactifyTabs(rawTabs, blankChar = '-') {
-        const rows = splitLines(rawTabs)
+    function compactifyTab(rawTab, blankChar = '-') {
+        const rows = splitLines(rawTab)
         const columnIndexes = [...Array(rows[0].length).keys()]
 
         return columnIndexes.map(colIndex => (
@@ -40,15 +41,22 @@ layout: page
         )).join('')
     }
 
-    function toggleCompactifyTab() {
+    function toggleTabCompactMode() {
+        const oldIsCompact = !!+window.localStorage.getItem('tab-compact-mode')
+        const newIsCompact = !oldIsCompact
+        applyTabCompactMode(newIsCompact);
+        window.localStorage.setItem('tab-compact-mode', String(+newIsCompact))
+    }
+
+    function applyTabCompactMode(isCompact) {
         const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre code:not(.language-bbx-melody)')]
 
         tabBoxEls.map(el => {
-            if (!el.hasAttribute('data-initial-content')) {
+            if (isCompact) {
                 el.setAttribute('data-initial-content', el.textContent)
-                el.textContent = compactifyTabs(el.textContent)
-            } else {
-                el.textContent = el.getAttribute('data-initial-content');
+                el.textContent = compactifyTab(el.textContent)
+            } else if (el.hasAttribute('data-initial-content')) {
+                el.textContent = el.getAttribute('data-initial-content')
                 el.removeAttribute('data-initial-content')
             }
         })
@@ -83,6 +91,21 @@ layout: page
         e.preventDefault();
     }
 
-    document.querySelector('#compactify-tab-button').addEventListener('click', toggleCompactifyTab)
-    document.addEventListener('keydown', handleActionButtonKeyboardBindings)
+    function loadUIState() {
+        const isTabCompactMode = !!+window.localStorage.getItem('tab-compact-mode');
+        document.querySelector('#compactify-tab-button').checked = isTabCompactMode
+        applyTabCompactMode(isTabCompactMode)
+    }
+
+    function bindListeners() {
+        document.querySelector('#compactify-tab-button').addEventListener('change', toggleTabCompactMode)
+        document.addEventListener('keydown', handleActionButtonKeyboardBindings)
+    }
+
+    function main() {
+        loadUIState()
+        bindListeners()
+    }
+
+    main()
 </script>
