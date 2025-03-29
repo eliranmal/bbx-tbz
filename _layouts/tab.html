@@ -45,10 +45,10 @@ layout: page
 
         tabBoxEls.map(el => {
             if (!el.hasAttribute('data-initial-content')) {
-                el.setAttribute('data-initial-content', el.innerHTML)
+                el.setAttribute('data-initial-content', el.textContent)
                 el.textContent = compactifyTabs(el.textContent)
             } else {
-                el.innerHTML = el.getAttribute('data-initial-content');
+                el.textContent = el.getAttribute('data-initial-content');
                 el.removeAttribute('data-initial-content')
             }
         })
