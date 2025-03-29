@@ -103,33 +103,29 @@ dl {
   }
 }
 
-pre, .highlight {
-  background-color: transparent;
-}
-
 pre {
+  margin: 0;
+  padding: 0;
   border: 0 none;
-  border-inline-start: $border-thin;
   border-radius: 0;
-}
+  background-color: transparent;
 
-// the code highlighter's 'plaintext' mode (i.e. the default mode)
-// is used by tab boxes
-.language-plaintext pre {
-  background-image: $fade-gradient;
-}
+  // we have to use the inner <code> as the box element, to be able to differentiate between box types
+  // (it is the only level that's tagged with lang' classnames when the custom syntax-highlighter is switched off)
+  code {
+    display: block;
+    margin-block-end: 20px;
+    padding: .5em 1em;
+    border-inline-start: $border-thin;
+    background-image: $fade-gradient;
 
-// the code highlighter's 'brainfuck' mode is used by melody boxes,
-// due to it's simple dom rendering
-// (to utilize a highlight mode suitable for melody boxes, use the 'j' mode)
-.language-brainfuck pre {
-  padding-block: 0;
-  margin-block-end: .5em;
-  border-color: transparent;
-
-  * {
-    font-style: normal !important;
-    color: mediumpurple !important;
+    &.language-bbx-melody {
+      padding-block: 0;
+      margin-block-end: 8px;
+      border-color: transparent;
+      background-image: none;
+      color: mediumpurple;
+    }
   }
 }
 

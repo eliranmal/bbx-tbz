@@ -10,7 +10,7 @@ layout: tab
 
 <br/>
 
-```brainfuck
+```bbx-melody
 |~ 3 6  7| 6 (5)  |
 | 1 8    |  5   -2|
 ```

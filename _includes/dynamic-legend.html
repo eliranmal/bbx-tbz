@@ -27,7 +27,7 @@ then reveal it after item filtering is done.
     }
 
     // lookup symbols in the tab page tab-boxes, to include them
-    const tabBoxEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} pre')];
+    const tabBoxEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} pre code:not(.language-bbx-melody)')];
     const tabSymbols = new Set(tokenizeDomContent(tabBoxEls));
     // lookup symbols in the tab page legend
     const tabLegendTermEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} dl dt')];
