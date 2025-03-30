@@ -62,33 +62,24 @@ layout: page
         })
     }
 
-    function handleActionButtonKeyboardBindings (e) {
+    function handleActionButtonKeyboardBindings(e) {
         const {key, shiftKey} = e;
-
-        if (!shiftKey) {
-            return;
-        }
-        let elSelector;
-        switch (key) {
-            case 'ArrowRight':
-                elSelector = '#next-tab-button';
-                break;
-            case 'ArrowLeft':
-                elSelector = '#prev-tab-button';
-                break;
-            case 'ArrowUp':
-                elSelector = '#compactify-tab-button';
-                break;
-            default:
-                return;
-        }
-        const actionBtnEl = document.querySelector(`${elSelector}:not(.disabled)`);
-        if (!actionBtnEl) {
-            return;
+        const selectorByKey = {
+            'ArrowRight': '#next-tab-button',
+            'ArrowLeft': '#prev-tab-button',
+            'ArrowUp': '#compactify-tab-button',
+            'ArrowDown': '#compactify-tab-button',
         }
 
-        actionBtnEl.click();
-        e.preventDefault();
+        if (!shiftKey || !(key in selectorByKey)) {
+            return
+        }
+
+        const actionBtnEl = document.querySelector(`${selectorByKey[key]}:not(.disabled)`);
+        if (actionBtnEl) {
+            actionBtnEl.click();
+            e.preventDefault();
+        }
     }
 
     function loadUIState() {
