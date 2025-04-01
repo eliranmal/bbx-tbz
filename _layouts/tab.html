@@ -100,12 +100,9 @@ layout: page
         return el?.classList.contains('language-bbx-melody')
     }
 
-    function isTabBoxGroupHead(tabBoxEl) {
-        const tabBoxWrapperPrevEl = tabBoxEl.parentElement.previousElementSibling
-
-        return !isPreEl(tabBoxWrapperPrevEl) ||
-            isMelodyBoxEl(tabBoxWrapperPrevEl?.firstElementChild) &&
-            !isPreEl(tabBoxWrapperPrevEl?.previousElementSibling)
+    function isBoxGroupHead(boxEl) {
+        const boxWrapperPrevEl = boxEl.parentElement.previousElementSibling
+        return !isPreEl(boxWrapperPrevEl)
     }
 
     function createBoxEl(rawBarSegment, className) {
@@ -120,14 +117,6 @@ layout: page
         return boxWrapperEl
     }
 
-    function resolveTabBoxMelodyBoxEl(tabBoxEl) {
-        const prevTabBoxEl = tabBoxEl.parentElement.previousElementSibling.firstElementChild;
-        const hasMelodyBox = isMelodyBoxEl(prevTabBoxEl)
-        if (hasMelodyBox) {
-            return prevTabBoxEl
-        }
-    }
-
     function resolveMaxBoxHeight(boxEls) {
         return boxEls.reduce((accum, boxEl) => {
             const lineCount = splitLines(boxEl?.textContent).length
@@ -135,28 +124,51 @@ layout: page
         }, 0);
     }
 
-    function resolveBoxGroups(tabBoxEls) {
+    function categorizeTabBoxes(boxEls) {
+        return boxEls.reduce((accum, boxEl, index, arr) => {
+            const prevBoxEl = arr[index - 1];
+            if (!isMelodyBoxEl(boxEl)) {
+                accum.tabBoxEls.push(boxEl)
+                accum.melodyBoxEls.push(isMelodyBoxEl(prevBoxEl) ? prevBoxEl : null)
+            }
+            return accum
+        }, { tabBoxEls: [], melodyBoxEls: [] })
+    }
+
+    function aggregateTabBoxesContent(tabBoxEls) {
+        return joinBars(tabBoxEls.map(el => el.textContent));
+    }
+
+    function aggregateMelodyBoxesContent(melodyBoxEls, tabBoxEls) {
+        const maxMelodyBoxHeight = resolveMaxBoxHeight(melodyBoxEls)
+        return joinBars(
+            melodyBoxEls.map((melodyBoxEl, index) => (
+                melodyBoxEl?.textContent ?? toPlaceholderTab(tabBoxEls[index].textContent, maxMelodyBoxHeight)
+            ))
+        );
+    }
+
+    function resolveBoxGroups(boxEls) {
         // note: getting reliable data from text-content relies on
         // 'compact mode' being switched off at this point
-        return tabBoxEls
-            .reduce((accum, tabBoxEl) => {
-                if (isTabBoxGroupHead(tabBoxEl)) {
+        return boxEls
+            .reduce((accum, boxEl) => {
+                if (isBoxGroupHead(boxEl)) {
                     accum.push([])
                 }
-                accum[accum.length - 1].push(tabBoxEl)
+                accum[accum.length - 1].push(boxEl)
                 return accum;
             }, [])
-            .reduce((accum, groupTabBoxEls) => {
-                const groupMelodyBoxEls = groupTabBoxEls.map(el => resolveTabBoxMelodyBoxEl(el));
-                const maxMelodyBoxHeight = resolveMaxBoxHeight(groupMelodyBoxEls)
-                accum.push({
+            .reduce((accum, groupBoxEls) => {
+                const {
                     tabBoxEls: groupTabBoxEls,
-                    aggregateTabContent: joinBars(groupTabBoxEls.map(el => el.textContent)),
-                    aggregateMelodyContent: joinBars(
-                        groupMelodyBoxEls.map((melodyBoxEl, index) => (
-                            melodyBoxEl?.textContent ?? toPlaceholderTab(groupTabBoxEls[index].textContent, maxMelodyBoxHeight)
-                        ))
-                    ),
+                    melodyBoxEls: groupMelodyBoxEls,
+                } = categorizeTabBoxes(groupBoxEls);
+
+                accum.push({
+                    boxEls: groupBoxEls,
+                    aggregatedMelodyContent: aggregateMelodyBoxesContent(groupMelodyBoxEls, groupTabBoxEls),
+                    aggregatedTabContent: aggregateTabBoxesContent(groupTabBoxEls),
                 })
                 return accum
             }, []);
@@ -164,19 +176,19 @@ layout: page
 
     function renderBoxGroups(boxGroups, barsPerRow) {
         boxGroups.map(boxGroup => {
-            const groupFirstTabBoxWrapperEl = boxGroup.tabBoxEls[0].parentElement
-            const groupTabBoxContents = splitBars(boxGroup.aggregateTabContent, barsPerRow)
-            const groupMelodyBoxContents = splitBars(boxGroup.aggregateMelodyContent, barsPerRow)
+            const groupFirstBoxWrapperEl = boxGroup.boxEls[0].parentElement
+            const groupTabBoxContents = splitBars(boxGroup.aggregatedTabContent, barsPerRow)
+            const groupMelodyBoxContents = splitBars(boxGroup.aggregatedMelodyContent, barsPerRow)
 
             range(groupTabBoxContents).map(boxIndex => {
                 if (groupMelodyBoxContents?.length) {
                     const melodyBoxContent = groupMelodyBoxContents[boxIndex];
                     const melodyBoxWrapperEl = createBoxEl(melodyBoxContent, 'language-bbx-melody')
-                    groupFirstTabBoxWrapperEl.insertAdjacentElement('beforebegin', melodyBoxWrapperEl)
+                    groupFirstBoxWrapperEl.insertAdjacentElement('beforebegin', melodyBoxWrapperEl)
                 }
                 const tabBoxContent = groupTabBoxContents[boxIndex]
                 const tabBoxWrapperEl = createBoxEl(tabBoxContent);
-                groupFirstTabBoxWrapperEl.insertAdjacentElement('beforebegin', tabBoxWrapperEl)
+                groupFirstBoxWrapperEl.insertAdjacentElement('beforebegin', tabBoxWrapperEl)
             })
         })
     }
@@ -207,8 +219,7 @@ layout: page
     }
 
     function applyBarsPerRow(barCountPerRow) {
-        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code:not(.language-bbx-melody)')]
-        const melodyBoxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code.language-bbx-melody')]
+        const boxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code')]
         const spawnedTabBoxEls = [...document.querySelectorAll('.tab-wrapper pre[data-spawned="true"] code')]
 
         // temporarily reset compact mode, if switched-on, to avoid collisions
@@ -219,12 +230,11 @@ layout: page
         // remove previously generated elements to allow clean iteration on initial tab data
         spawnedTabBoxEls.map(el => el.parentElement.remove())
         // show or hide initial elements according to barCountPerRow param (0 value means revert to initial state)
-        tabBoxEls.map(el => el.parentElement.classList.toggle('hidden', barCountPerRow > 0))
-        melodyBoxEls.map(el => el.parentElement.classList.toggle('hidden', barCountPerRow > 0))
+        boxEls.map(el => el.parentElement.classList.toggle('hidden', barCountPerRow > 0))
 
         if (barCountPerRow > 0) {
             // group tab-boxes by adjacency and aggregate their raw tab data
-            const tabBoxGroups = resolveBoxGroups(tabBoxEls)
+            const tabBoxGroups = resolveBoxGroups(boxEls)
             // inject groups' data into the dom, with the new bar division
             renderBoxGroups(tabBoxGroups, barCountPerRow);
         }
