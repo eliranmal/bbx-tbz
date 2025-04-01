@@ -154,6 +154,11 @@ pre {
     }
   }
 
+  > input[type="number"] {
+    box-sizing: border-box;
+    padding-inline-start: .75rem;
+  }
+
   > input[type="checkbox"] {
     display: none;
   }

@@ -6,6 +6,9 @@ layout: page
 {{ content }}
 
     <div class="action-buttons">
+        <input id="bars-per-row-selector" title="
+&nbsp;&nbsp;&nbsp;bars per line&nbsp;&nbsp;&nbsp;
+" type="number" min="0" max="8" value="0" />
         <input id="compactify-tab-button" title="
     &nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
 " type="checkbox"/>
@@ -26,19 +29,210 @@ layout: page
 </div>
 
 <script>
-    function splitLines(rawText) {
+
+    function range(arrayLike) {
+        return [...Array(arrayLike.length).keys()]
+    }
+
+    function toPlaceholderTab(rawTab, height = splitLines(rawTab).length, barDividerChar = '|') {
+        return splitLines(
+            rawTab.replaceAll(new RegExp(`[^${barDividerChar}\\r\\n]`, 'gm'), ' ')
+        )
+            .slice(0, height)
+            .join('\n')
+    }
+
+    function splitLines(rawText = '') {
         return rawText.split('\n').filter(Boolean)
+    }
+
+    function splitBars(rawTab, barsPerRow = 1, barDividerChar = '|') {
+        if (barsPerRow <= 0 || !rawTab) {
+            return []
+        }
+
+        const rows = splitLines(rawTab);
+        const columnIndexes = range(rows[0])
+
+        const barDividerIndexes = columnIndexes
+            // filter column indexes to get only bar-dividers
+            .filter(colIndex => (
+                rows[0][colIndex] === barDividerChar
+            ))
+            // filter bar-divider indexes according to bars-per-row
+            .filter((barDividerIndex, pos, arr) => (
+                pos % barsPerRow === 0 || pos === arr.length - 1
+            ))
+
+        return barDividerIndexes
+            .map((barDividerIndex, pos, arr) => {
+                const nextBarDividerIndex = arr[pos + 1];
+                if (nextBarDividerIndex) {
+                    return rows.map(row => (
+                        row.slice(barDividerIndex, nextBarDividerIndex).concat(barDividerChar)
+                    )).join('\n')
+                }
+            })
+            .filter(Boolean)
+    }
+
+    function joinBars(rawBars, barDividerChar = '|') {
+        const barsAsRows = rawBars.map(splitLines)
+        const rowIndexes = range(barsAsRows[0])
+        return rowIndexes
+            .map(rowIndex => (
+                [
+                    barDividerChar,
+                    ...barsAsRows.map(barAsRows => {
+                        const barRow = barAsRows[rowIndex]
+                        return barRow.slice(barRow.indexOf(barDividerChar) + 1)
+                    })
+                ].join('')
+            ))
+            .join('\n')
+    }
+
+    function isPreEl(el) {
+        return el?.tagName.toLowerCase() === 'pre'
+    }
+
+    function isMelodyBoxEl(el) {
+        return el?.classList.contains('language-bbx-melody')
+    }
+
+    function isTabBoxGroupHead(tabBoxEl) {
+        const tabBoxWrapperPrevEl = tabBoxEl.parentElement.previousElementSibling
+
+        return !isPreEl(tabBoxWrapperPrevEl) ||
+            isMelodyBoxEl(tabBoxWrapperPrevEl?.firstElementChild) &&
+            !isPreEl(tabBoxWrapperPrevEl?.previousElementSibling)
+    }
+
+    function createBoxEl(rawBarSegment, className) {
+        const boxEl = document.createElement('code')
+        boxEl.textContent = String(rawBarSegment)
+        if (className) {
+            boxEl.classList.add(className);
+        }
+        const boxWrapperEl = document.createElement('pre')
+        boxWrapperEl.setAttribute('data-spawned', 'true')
+        boxWrapperEl.appendChild(boxEl)
+        return boxWrapperEl
+    }
+
+    function resolveTabBoxMelodyBoxEl(tabBoxEl) {
+        const prevTabBoxEl = tabBoxEl.parentElement.previousElementSibling.firstElementChild;
+        const hasMelodyBox = isMelodyBoxEl(prevTabBoxEl)
+        if (hasMelodyBox) {
+            return prevTabBoxEl
+        }
+    }
+
+    function resolveMaxBoxHeight(boxEls) {
+        return boxEls.reduce((accum, boxEl) => {
+            const lineCount = splitLines(boxEl?.textContent).length
+            return Math.max(accum, lineCount)
+        }, 0);
+    }
+
+    function resolveBoxGroups(tabBoxEls) {
+        // note: getting reliable data from text-content relies on
+        // 'compact mode' being switched off at this point
+        return tabBoxEls
+            .reduce((accum, tabBoxEl) => {
+                if (isTabBoxGroupHead(tabBoxEl)) {
+                    accum.push([])
+                }
+                accum[accum.length - 1].push(tabBoxEl)
+                return accum;
+            }, [])
+            .reduce((accum, groupTabBoxEls) => {
+                const groupMelodyBoxEls = groupTabBoxEls.map(el => resolveTabBoxMelodyBoxEl(el));
+                const maxMelodyBoxHeight = resolveMaxBoxHeight(groupMelodyBoxEls)
+                accum.push({
+                    tabBoxEls: groupTabBoxEls,
+                    aggregateTabContent: joinBars(groupTabBoxEls.map(el => el.textContent)),
+                    aggregateMelodyContent: joinBars(
+                        groupMelodyBoxEls.map((melodyBoxEl, index) => (
+                            melodyBoxEl?.textContent ?? toPlaceholderTab(groupTabBoxEls[index].textContent, maxMelodyBoxHeight)
+                        ))
+                    ),
+                })
+                return accum
+            }, []);
+    }
+
+    function renderBoxGroups(boxGroups, barsPerRow) {
+        boxGroups.map(boxGroup => {
+            const groupFirstTabBoxWrapperEl = boxGroup.tabBoxEls[0].parentElement
+            const groupTabBoxContents = splitBars(boxGroup.aggregateTabContent, barsPerRow)
+            const groupMelodyBoxContents = splitBars(boxGroup.aggregateMelodyContent, barsPerRow)
+
+            range(groupTabBoxContents).map(boxIndex => {
+                if (groupMelodyBoxContents?.length) {
+                    const melodyBoxContent = groupMelodyBoxContents[boxIndex];
+                    const melodyBoxWrapperEl = createBoxEl(melodyBoxContent, 'language-bbx-melody')
+                    groupFirstTabBoxWrapperEl.insertAdjacentElement('beforebegin', melodyBoxWrapperEl)
+                }
+                const tabBoxContent = groupTabBoxContents[boxIndex]
+                const tabBoxWrapperEl = createBoxEl(tabBoxContent);
+                groupFirstTabBoxWrapperEl.insertAdjacentElement('beforebegin', tabBoxWrapperEl)
+            })
+        })
     }
 
     function compactifyTab(rawTab, blankChar = '-') {
         const rows = splitLines(rawTab)
-        const columnIndexes = [...Array(rows[0].length).keys()]
+        const columnIndexes = range(rows[0])
 
         return columnIndexes.map(colIndex => (
             rows.reduce((accum, row) => (
                 row[colIndex] !== blankChar ? row[colIndex] : accum
             ), blankChar)
         )).join('')
+    }
+
+    function applyTabCompactMode(isCompact) {
+        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre code:not(.language-bbx-melody)')]
+
+        tabBoxEls.map(el => {
+            if (isCompact) {
+                el.setAttribute('data-full-content', el.textContent)
+                el.textContent = compactifyTab(el.textContent)
+            } else if (el.hasAttribute('data-full-content')) {
+                el.textContent = el.getAttribute('data-full-content')
+                el.removeAttribute('data-full-content')
+            }
+        })
+    }
+
+    function applyBarsPerRow(barCountPerRow) {
+        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code:not(.language-bbx-melody)')]
+        const melodyBoxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code.language-bbx-melody')]
+        const spawnedTabBoxEls = [...document.querySelectorAll('.tab-wrapper pre[data-spawned="true"] code')]
+
+        // temporarily reset compact mode, if switched-on, to avoid collisions
+        const currIsCompact = !!+window.localStorage.getItem('tab-compact-mode')
+        if (currIsCompact) {
+            applyTabCompactMode(false);
+        }
+        // remove previously generated elements to allow clean iteration on initial tab data
+        spawnedTabBoxEls.map(el => el.parentElement.remove())
+        // show or hide initial elements according to barCountPerRow param (0 value means revert to initial state)
+        tabBoxEls.map(el => el.parentElement.classList.toggle('hidden', barCountPerRow > 0))
+        melodyBoxEls.map(el => el.parentElement.classList.toggle('hidden', barCountPerRow > 0))
+
+        if (barCountPerRow > 0) {
+            // group tab-boxes by adjacency and aggregate their raw tab data
+            const tabBoxGroups = resolveBoxGroups(tabBoxEls)
+            // inject groups' data into the dom, with the new bar division
+            renderBoxGroups(tabBoxGroups, barCountPerRow);
+        }
+
+        // restore compact mode if needed
+        if (currIsCompact) {
+            applyTabCompactMode(true);
+        }
     }
 
     function toggleTabCompactMode() {
@@ -48,18 +242,10 @@ layout: page
         window.localStorage.setItem('tab-compact-mode', String(+newIsCompact))
     }
 
-    function applyTabCompactMode(isCompact) {
-        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre code:not(.language-bbx-melody)')]
-
-        tabBoxEls.map(el => {
-            if (isCompact) {
-                el.setAttribute('data-initial-content', el.textContent)
-                el.textContent = compactifyTab(el.textContent)
-            } else if (el.hasAttribute('data-initial-content')) {
-                el.textContent = el.getAttribute('data-initial-content')
-                el.removeAttribute('data-initial-content')
-            }
-        })
+    function updateTabBarsPerRow({ target: { valueAsNumber } }) {
+        const newBarsPerRow = valueAsNumber
+        applyBarsPerRow(newBarsPerRow)
+        window.localStorage.setItem('bars-per-row', String(+newBarsPerRow))
     }
 
     function handleActionButtonKeyboardBindings(e) {
@@ -83,13 +269,18 @@ layout: page
     }
 
     function loadUIState() {
-        const isTabCompactMode = !!+window.localStorage.getItem('tab-compact-mode');
+        const isTabCompactMode = !!+window.localStorage.getItem('tab-compact-mode')
         document.querySelector('#compactify-tab-button').checked = isTabCompactMode
         applyTabCompactMode(isTabCompactMode)
+
+        const barsPerRow = +window.localStorage.getItem('bars-per-row')
+        document.querySelector('#bars-per-row-selector').value = barsPerRow
+        applyBarsPerRow(barsPerRow)
     }
 
     function bindListeners() {
         document.querySelector('#compactify-tab-button').addEventListener('change', toggleTabCompactMode)
+        document.querySelector('#bars-per-row-selector').addEventListener('change', updateTabBarsPerRow)
         document.addEventListener('keydown', handleActionButtonKeyboardBindings)
     }
 
@@ -99,4 +290,5 @@ layout: page
     }
 
     main()
+
 </script>
