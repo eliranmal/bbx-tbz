@@ -6,7 +6,6 @@ layout: tab
 ## michael jackson
 
 #### 132 BPM
-#### `-` = 1/8
 
 <br/>
 

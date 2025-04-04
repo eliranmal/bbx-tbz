@@ -6,7 +6,6 @@ layout: tab
 ## red snapper
 
 #### ~144 BPM
-#### `-` = 1/16
 
 <br/>
 

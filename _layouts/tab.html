@@ -193,14 +193,14 @@ layout: page
         })
     }
 
-    function compactifyTab(rawTab, blankChar = '-') {
+    function compactifyTab(rawTab, spacerChar = '-') {
         const rows = splitLines(rawTab)
         const columnIndexes = range(rows[0])
 
         return columnIndexes.map(colIndex => (
             rows.reduce((accum, row) => (
-                row[colIndex] !== blankChar ? row[colIndex] : accum
-            ), blankChar)
+                row[colIndex] !== spacerChar ? row[colIndex] : accum
+            ), spacerChar)
         )).join('')
     }
 
@@ -243,6 +243,48 @@ layout: page
         if (currIsCompact) {
             applyTabCompactMode(true);
         }
+    }
+
+    function resolveTabBarResolution(rawTab, barDividerChar = '|') {
+        // skip first item; when the first char is the separator, the first item will be empty
+        return rawTab.split(barDividerChar)[1].length
+    }
+
+    function resolveTabNoteDensity(rawTab, barDividerChar = '|', spacerChar = '-') {
+        const compactTab = compactifyTab(rawTab, spacerChar)
+        const compactTabChars = compactTab.replace(barDividerChar, '').split('')
+        const nonSpacerNotes = compactTabChars.filter(char => char !== spacerChar).length
+        return (nonSpacerNotes / (compactTabChars.length / 100)).toFixed(2)
+    }
+
+    /**
+     * rearrange lines according to available rows.
+     * to be used in conjunction with css text-overflow, to handle lines that are too long
+     */
+    function fitLinesToBlock(textLines, boundingRowCount) {
+        return textLines
+            .reduce((accum, term, index) => {
+                const metadataRowIndex = index % boundingRowCount
+                accum[metadataRowIndex] = accum[metadataRowIndex] ?? []
+                accum[metadataRowIndex].push(term)
+                return accum
+            }, [])
+            .map(metadataRow => metadataRow.join(', '))
+            .join('\n')
+    }
+
+    function resolveTabBoxMetadata(rawTab) {
+        const noteDensity = resolveTabNoteDensity(rawTab)
+        const barResolution = resolveTabBarResolution(rawTab)
+
+        const tabMetadata = [
+            `beat division: 1/${barResolution}`,
+            `note density: ${(noteDensity)}%`,
+        ]
+
+        // rearrange metadata lines according to available rows in its tab box
+        const tabRows = splitLines(rawTab)
+        return fitLinesToBlock(tabMetadata, tabRows.length)
     }
 
     function toggleTabCompactMode() {
@@ -288,10 +330,33 @@ layout: page
         applyBarsPerRow(barsPerRow)
     }
 
-    function bindListeners() {
+    function bindTabBoxMetadataListener() {
+        const tabBoxEls = [...document.querySelectorAll('pre code:not(.language-bbx-melody)')]
+        tabBoxEls.map(el => {
+            // set data-attr on parent to prevent the metadata-overlay from scrolling with the child
+            el.addEventListener('mouseover', ({target: {textContent, parentElement: tabBoxWrapperEl}}) => {
+                const tabBoxMetadata = resolveTabBoxMetadata(textContent)
+                tabBoxWrapperEl.setAttribute('data-tab-metadata', tabBoxMetadata)
+            })
+            el.addEventListener('mouseout', ({target: {parentElement: tabBoxWrapperEl}}) => (
+                tabBoxWrapperEl.removeAttribute('data-tab-metadata')
+            ))
+        })
+    }
+
+    function bindActionButtonListeners() {
         document.querySelector('#compactify-tab-button').addEventListener('change', toggleTabCompactMode)
         document.querySelector('#bars-per-row-selector').addEventListener('change', updateTabBarsPerRow)
         document.addEventListener('keydown', handleActionButtonKeyboardBindings)
+    }
+
+    function bindTabBoxListeners() {
+        bindTabBoxMetadataListener()
+    }
+
+    function bindListeners() {
+        bindActionButtonListeners()
+        bindTabBoxListeners()
     }
 
     function main() {

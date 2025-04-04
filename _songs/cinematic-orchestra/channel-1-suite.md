@@ -6,7 +6,6 @@ layout: tab
 ## cinematic orchestra
 
 #### 86-87 BPM
-#### `-` = 1/32
 
 <br/>
 

@@ -6,7 +6,6 @@ layout: tab
 ## dr. dre
 
 #### 88.5 BPM
-#### `-` = 1/16
 
 <br/>
 

@@ -6,7 +6,6 @@ layout: tab
 ## rhazel
 
 #### 96 BPM (heavy swing)
-#### `-` = 1/16
 
 <br/>
 

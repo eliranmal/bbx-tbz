@@ -6,7 +6,6 @@ layout: tab
 ## fiona apple
 
 #### ~138 BPM
-#### `-` = 1/16
 
 <br/>
         

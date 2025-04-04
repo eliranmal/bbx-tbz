@@ -3,8 +3,34 @@
 
 @import "{{ site.theme }}";
 
-$border-thin: .05rem solid #888;
+
+$border-thin: .05rem solid #777;
 $fade-gradient: linear-gradient(to right, #fff, transparent 66%);
+$fade-gradient-overlay: linear-gradient(to right, #fff, #f2f2f2 66%);
+// taken from theme stylesheet, declared as var' for reuse
+$font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+/**
+ * note: only use absolute units for $size (e.g. no 'em'),
+ * as it's used both for font-size and box sizes
+ */
+@mixin round-button($size, $border-width: $size * .0125) {
+  box-sizing: border-box;
+  display: block;
+  width: $size;
+  height: $size;
+  padding: 0;
+  border: $border-width solid #777;
+  border-radius: $size * .5;
+  font-size: $size * .667;
+  line-height: calc(#{$size} - (#{$border-width} * 2));
+  text-align: center;
+  background: #fff none;
+  color: hotpink;
+  cursor: pointer;
+}
+
 
 html {
   font-size: 16px;
@@ -104,7 +130,9 @@ dl {
 }
 
 pre {
-  margin: 0;
+  // reset theme style rule
+  overflow: unset;
+  margin: 0 0 20px;
   padding: 0;
   border: 0 none;
   border-radius: 0;
@@ -114,7 +142,7 @@ pre {
   // (it is the only level that's tagged with lang' classnames when the custom syntax-highlighter is switched off)
   code {
     display: block;
-    margin-block-end: 20px;
+    overflow-x: auto;
     padding: .5em 1em;
     border-inline-start: $border-thin;
     background-image: $fade-gradient;
@@ -129,25 +157,64 @@ pre {
   }
 }
 
+// tab-box overlay for metadata (e.g. beat division)
+pre[data-tab-metadata] {
+  position: relative;
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover:before,
+  &:active:after {
+    opacity: 1;
+  }
+
+  &:before {
+    $button-size: 1rem;
+    @include round-button($button-size, 0);
+    content: 'i';
+    top: calc(50% - #{$button-size * .5});
+    left: -#{$button-size * 1.5};
+    z-index: 1;
+    background-color: #aaaaaa;
+    color: #fff;
+  }
+
+  &:after {
+    content: attr(data-tab-metadata);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: .5rem 1rem;
+    border-inline-start: $border-thin;
+    background-image: $fade-gradient-overlay;
+    color: #888888;
+    font-family: $font-family;
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
 .action-buttons {
   position: fixed;
   bottom: 4rem;
   right: 4rem;
 
   > * {
-    display: block;
+    @include round-button(3rem);
     margin-block-start: 1rem;
-    padding: 0;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.5rem;
-    border: $border-thin;
-    line-height: 3rem;
-    text-align: center;
-    background: #fff none;
-    color: hotpink;
     font-size: .85rem;
-    cursor: pointer;
 
     &:hover {
       font-weight: bold;
@@ -216,11 +283,6 @@ details {
     // bring song title and artist subtitle closer together
     margin-top: -1em;
     color: #c9c9c9;
-  }
-
-  // bring details headings (tempo and grid resolution) closer together
-  h4 + h4 {
-    margin-top: -.5em;
   }
 }
 

@@ -6,7 +6,6 @@ layout: tab
 ## biig piig
 
 #### ~76.5 BPM (swing)
-#### `-` = 1/16
 
 <br/>
 

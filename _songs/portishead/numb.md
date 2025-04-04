@@ -6,7 +6,6 @@ layout: tab
 ## portishead
 
 #### ~78 BPM (heavy swing)
-#### `-` = 1/16
 
 <br/>
 

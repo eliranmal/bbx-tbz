@@ -6,7 +6,6 @@ layout: tab
 ## telefon tel aviv
 
 #### ~133 BPM
-#### `-` = 1/16
 
 <br/>
 

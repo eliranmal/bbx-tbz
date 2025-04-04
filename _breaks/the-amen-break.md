@@ -5,7 +5,6 @@ layout: tab
 # the amen break
 
 #### 136 BPM
-#### `-` = 1/16
 
 <br/>
 

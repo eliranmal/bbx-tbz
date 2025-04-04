@@ -6,7 +6,6 @@ layout: tab
 ## pharrell & snoop dogg
 
 #### 92 BPM
-#### `-` = 1/16
 
 <br/>
 

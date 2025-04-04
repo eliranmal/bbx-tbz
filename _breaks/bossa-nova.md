@@ -5,7 +5,6 @@ layout: tab
 # bossa nova
 
 #### andante
-#### `-` = 1/16
 
 <br/>
 

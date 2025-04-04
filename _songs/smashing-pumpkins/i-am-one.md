@@ -6,7 +6,6 @@ layout: tab
 ## smashing pumpkins
 
 #### ~108 BPM
-#### `-` = 1/16
 
 <br/>
 
