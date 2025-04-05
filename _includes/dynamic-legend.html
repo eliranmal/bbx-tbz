@@ -26,32 +26,36 @@ then reveal it after item filtering is done.
             .split('')
     }
 
-    // lookup symbols in the tab page tab-boxes, to include them
-    const tabBoxEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} pre code:not(.language-bbx-melody)')];
-    const tabSymbols = new Set(tokenizeDomContent(tabBoxEls));
-    // lookup symbols in the tab page legend
-    const tabLegendTermEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} dl dt')];
-    const tabLegendSymbols = tokenizeDomContent(tabLegendTermEls);
+    function dynamicLegendMain() {
+        // lookup symbols in the tab page tab-boxes, to include them
+        const tabBoxEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} pre code:not(.language-bbx-melody)')];
+        const tabSymbols = new Set(tokenizeDomContent(tabBoxEls));
+        // lookup symbols in the tab page legend
+        const tabLegendTermEls = [...document.querySelectorAll('.{{ tab_page_wrapper_classname }} dl dt')];
+        const tabLegendSymbols = tokenizeDomContent(tabLegendTermEls);
 
-    // omit any symbol that is already found in the tab page legend
-    tabLegendSymbols.forEach(s => tabSymbols.delete(s));
+        // omit any symbol that is already found in the tab page legend
+        tabLegendSymbols.forEach(s => tabSymbols.delete(s));
 
-    // filter out any items that weren't found in tab-boxes,
-    // or were found in the tab page legend
-    const legendTermEls = [...document.querySelectorAll('.{{ wrapper_classname }} dl dt')];
-    const legendDescEls = [...document.querySelectorAll('.{{ wrapper_classname }} dl dd')];
-    const visibleItemsIndexes = legendTermEls.map((dtEl, i) => {
-        if (!tabSymbols.has(dtEl.textContent)) {
-            dtEl.classList.add('hidden');
-            legendDescEls[i].classList.add('hidden');
-        } else {
-            return String(i)
+        // filter out any items that weren't found in tab-boxes,
+        // or were found in the tab page legend
+        const legendTermEls = [...document.querySelectorAll('.{{ wrapper_classname }} dl dt')];
+        const legendDescEls = [...document.querySelectorAll('.{{ wrapper_classname }} dl dd')];
+        const visibleItemsIndexes = legendTermEls.map((dtEl, i) => {
+            if (!tabSymbols.has(dtEl.textContent)) {
+                dtEl.classList.add('hidden');
+                legendDescEls[i].classList.add('hidden');
+            } else {
+                return String(i)
+            }
+        });
+
+        // if not all items were hidden, reveal the wrapper
+        if (visibleItemsIndexes.some(Boolean)) {
+            const wrapperEl = document.querySelector('.{{ wrapper_classname }}');
+            wrapperEl.classList.remove('hidden');
         }
-    });
-
-    // if not all items were hidden, reveal the wrapper
-    if (visibleItemsIndexes.some(Boolean)) {
-        const wrapperEl = document.querySelector('.{{ wrapper_classname }}');
-        wrapperEl.classList.remove('hidden');
     }
+
+    dynamicLegendMain()
 </script>
