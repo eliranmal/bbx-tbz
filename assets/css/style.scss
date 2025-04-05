@@ -15,20 +15,29 @@ $font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
  * note: only use absolute units for $size (e.g. no 'em'),
  * as it's used both for font-size and box sizes
  */
-@mixin round-button($size, $border-width: $size * .0125) {
-  box-sizing: border-box;
+@mixin round-button($size, $font-size: $size * .333, $border-width: $size * .0125) {
+  box-sizing: content-box;
   display: block;
   width: $size;
   height: $size;
   padding: 0;
   border: $border-width solid #777;
-  border-radius: $size * .5;
-  font-size: $size * .667;
-  line-height: calc(#{$size} - (#{$border-width} * 2));
+  border-radius: ($size * .5) + $border-width;
+  font-size: $font-size;
+  line-height: #{$size};
   text-align: center;
   background: #fff none;
   color: hotpink;
   cursor: pointer;
+
+  &:hover {
+    font-weight: bold;
+  }
+
+  &[type="number"] {
+    width: $size - $font-size;
+    padding-inline-start: $font-size;
+  }
 }
 
 
@@ -176,7 +185,7 @@ pre[data-tab-metadata] {
 
   &:before {
     $button-size: 1rem;
-    @include round-button($button-size, 0);
+    @include round-button($button-size, $button-size * .667, 0);
     content: 'i';
     top: calc(50% - #{$button-size * .5});
     left: -#{$button-size * 1.5};
@@ -214,16 +223,6 @@ pre[data-tab-metadata] {
   > * {
     @include round-button(3rem);
     margin-block-start: 1rem;
-    font-size: .85rem;
-
-    &:hover {
-      font-weight: bold;
-    }
-  }
-
-  > input[type="number"] {
-    box-sizing: border-box;
-    padding-inline-start: .75rem;
   }
 
   > input[type="checkbox"] {
