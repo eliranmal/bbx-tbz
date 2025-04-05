@@ -287,6 +287,72 @@ details {
 }
 
 
+.playhead-on {
+  pre code:not(.language-bbx-melody) {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 1rem;
+
+      font-size: 9.6px;
+
+      display: block;
+      border-inline-start: 1em solid hotpink;
+      opacity: .2;
+
+      animation-name: tick-1, tick-2, tick-3, tick-4;
+      animation-delay: 0s, 4s, 8s, 12s;
+      animation-duration: 4s;
+      animation-timing-function: steps(16);
+    }
+  }
+}
+
+@keyframes tick-1 {
+  from {
+    margin-left: 1em;
+  }
+
+  to {
+    margin-left: #{16 + 1}em;
+  }
+}
+
+@keyframes tick-2 {
+  from {
+    margin-left: #{16 + 2}em;
+  }
+
+  to {
+    margin-left: #{32 + 2}em;
+  }
+}
+
+@keyframes tick-3 {
+  from {
+    margin-left: #{32 + 3}em;
+  }
+
+  to {
+    margin-left: #{48 + 3}em;
+  }
+}
+
+@keyframes tick-4 {
+  from {
+    margin-left: #{48 + 4}em;
+  }
+
+  to {
+    margin-left: #{64 + 4}em;
+  }
+}
+
+
 // overrides theme rules
 
 @media print, screen and (max-width: 960px) {

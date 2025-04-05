@@ -6,6 +6,10 @@ layout: page
 {{ content }}
 
     <div class="action-buttons">
+        <input id="playhead-button" type="checkbox"/>
+        <label for="playhead-button" title="
+    &nbsp;&nbsp;&nbsp;toggle play/stop&nbsp;&nbsp;&nbsp;
+">&gt;</label>
         <input id="bars-per-row-selector" title="
 &nbsp;&nbsp;&nbsp;bars per line&nbsp;&nbsp;&nbsp;
 " type="number" min="0" max="8" value="0" />
@@ -355,6 +359,9 @@ layout: page
     function bindActionButtonListeners() {
         document.querySelector('#compactify-tab-button').addEventListener('change', toggleTabCompactMode)
         document.querySelector('#bars-per-row-selector').addEventListener('change', updateTabBarsPerRow)
+        document.querySelector('#playhead-button').addEventListener('change', ({ target: { checked } }) => {
+            document.querySelector('.tab-wrapper').classList.toggle('playhead-on', checked)
+        })
         document.addEventListener('keydown', handleActionButtonKeyboardBindings)
     }
 
