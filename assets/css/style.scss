@@ -15,7 +15,7 @@ $font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
  * note: only use absolute units for $size (e.g. no 'em'),
  * as it's used both for font-size and box sizes
  */
-@mixin round-button($size, $font-size: $size * .333, $border-width: $size * .0125) {
+@mixin round-button($size, $font-size: $size * .3, $border-width: $size * .0125) {
   box-sizing: content-box;
   display: block;
   width: $size;
@@ -223,6 +223,7 @@ pre[data-tab-metadata] {
   > * {
     @include round-button(3rem);
     margin-block-start: 1rem;
+    letter-spacing: -.05em;
   }
 
   > input[type="checkbox"] {
