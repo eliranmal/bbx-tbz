@@ -30,8 +30,8 @@ layout: page
 
 <script>
 
-    function range(arrayLike) {
-        return [...Array(arrayLike.length).keys()]
+    function range(size) {
+        return [...Array(size).keys()]
     }
 
     function toPlaceholderTab(rawTab, height = splitLines(rawTab).length, barDividerChar = '|') {
@@ -52,7 +52,7 @@ layout: page
         }
 
         const rows = splitLines(rawTab);
-        const columnIndexes = range(rows[0])
+        const columnIndexes = range(rows[0].length)
 
         const barDividerIndexes = columnIndexes
             // filter column indexes to get only bar-dividers
@@ -78,7 +78,7 @@ layout: page
 
     function joinBars(rawBars, barDividerChar = '|') {
         const barsAsRows = rawBars.map(splitLines)
-        const rowIndexes = range(barsAsRows[0])
+        const rowIndexes = range(barsAsRows[0].length)
         return rowIndexes
             .map(rowIndex => (
                 [
@@ -180,7 +180,7 @@ layout: page
             const groupTabBoxContents = splitBars(boxGroup.aggregatedTabContent, barsPerRow)
             const groupMelodyBoxContents = splitBars(boxGroup.aggregatedMelodyContent, barsPerRow)
 
-            range(groupTabBoxContents).map(boxIndex => {
+            range(groupTabBoxContents.length).map(boxIndex => {
                 if (groupMelodyBoxContents?.length) {
                     const melodyBoxContent = groupMelodyBoxContents[boxIndex];
                     const melodyBoxWrapperEl = createBoxEl(melodyBoxContent, 'language-bbx-melody')
@@ -195,7 +195,7 @@ layout: page
 
     function compactifyTab(rawTab, spacerChar = '-') {
         const rows = splitLines(rawTab)
-        const columnIndexes = range(rows[0])
+        const columnIndexes = range(rows[0].length)
 
         return columnIndexes.map(colIndex => (
             rows.reduce((accum, row) => (
