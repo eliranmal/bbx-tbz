@@ -301,21 +301,27 @@ layout: page
     }
 
     function handleActionButtonKeyboardBindings(e) {
-        const {key, shiftKey} = e;
-        const selectorByKey = {
-            'ArrowRight': '#next-tab-button',
-            'ArrowLeft': '#prev-tab-button',
-            'ArrowUp': '#compactify-tab-button',
-            'ArrowDown': '#compactify-tab-button',
+        const {key, shiftKey, altKey} = e;
+        const bindingByKey = {
+            'ArrowRight': { selector: '#next-tab-button' },
+            'ArrowLeft': { selector: '#prev-tab-button' },
+            'ArrowUp': { selector: '#compactify-tab-button' },
+            'ArrowDown': { selector: '#compactify-tab-button' },
+            '—': { selector: '#bars-per-row-selector', action: 'stepDown', trigger: true },
+            '±': { selector: '#bars-per-row-selector', action: 'stepUp', trigger: true },
         }
 
-        if (!shiftKey || !(key in selectorByKey)) {
+        if (!shiftKey || !altKey || !(key in bindingByKey)) {
             return
         }
 
-        const actionBtnEl = document.querySelector(`${selectorByKey[key]}:not(.disabled)`);
+        const binding = bindingByKey[key];
+        const actionBtnEl = document.querySelector(`${binding.selector}:not(.disabled)`);
         if (actionBtnEl) {
-            actionBtnEl.click();
+            actionBtnEl[binding.action ?? 'click']()
+            if (binding.trigger) {
+                actionBtnEl.dispatchEvent(new Event('change'))
+            }
             e.preventDefault();
         }
     }
