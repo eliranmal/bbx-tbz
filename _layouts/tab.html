@@ -9,10 +9,10 @@ layout: page
         <input id="bars-per-row-selector" title="
 &nbsp;&nbsp;&nbsp;bars per line&nbsp;&nbsp;&nbsp;
 " type="number" min="0" max="8" value="0" />
-        <input id="compactify-tab-button" title="
+        <input id="compactify-tab-button" type="checkbox"/>
+        <label for="compactify-tab-button" title="
     &nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
-" type="checkbox"/>
-        <label for="compactify-tab-button">^ / v</label>
+">^ / v</label>
 {% unless page.previous.url %}
     {% assign prevClassName = 'disabled' %}
 {% endunless %}
