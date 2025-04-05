@@ -220,7 +220,7 @@ layout: page
 
     function applyBarsPerRow(barCountPerRow) {
         const boxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code')]
-        const spawnedTabBoxEls = [...document.querySelectorAll('.tab-wrapper pre[data-spawned="true"] code')]
+        const spawnedBoxEls = [...document.querySelectorAll('.tab-wrapper pre[data-spawned="true"] code')]
 
         // temporarily reset compact mode, if switched-on, to avoid collisions
         const currIsCompact = !!+window.localStorage.getItem('tab-compact-mode')
@@ -228,21 +228,23 @@ layout: page
             applyTabCompactMode(false);
         }
         // remove previously generated elements to allow clean iteration on initial tab data
-        spawnedTabBoxEls.map(el => el.parentElement.remove())
+        spawnedBoxEls.map(el => el.parentElement.remove())
         // show or hide initial elements according to barCountPerRow param (0 value means revert to initial state)
         boxEls.map(el => el.parentElement.classList.toggle('hidden', barCountPerRow > 0))
 
         if (barCountPerRow > 0) {
-            // group tab-boxes by adjacency and aggregate their raw tab data
-            const tabBoxGroups = resolveBoxGroups(boxEls)
+            // group boxes by adjacency and aggregate their raw tab data
+            const boxGroups = resolveBoxGroups(boxEls)
             // inject groups' data into the dom, with the new bar division
-            renderBoxGroups(tabBoxGroups, barCountPerRow);
+            renderBoxGroups(boxGroups, barCountPerRow);
         }
 
         // restore compact mode if needed
         if (currIsCompact) {
             applyTabCompactMode(true);
         }
+        // restore tab box event bindings
+        bindTabBoxListeners();
     }
 
     function resolveTabBarResolution(rawTab, barDividerChar = '|') {
