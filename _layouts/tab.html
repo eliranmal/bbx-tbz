@@ -306,26 +306,39 @@ layout: page
     function handleActionButtonKeyboardBindings(e) {
         const {key, shiftKey, altKey} = e;
         const bindingByKey = {
-            'ArrowRight': { selector: '#next-tab-button' },
-            'ArrowLeft': { selector: '#prev-tab-button' },
-            'ArrowUp': { selector: '#compactify-tab-button' },
-            'ArrowDown': { selector: '#compactify-tab-button' },
-            '—': { selector: '#bars-per-row-selector', action: 'stepDown', trigger: true },
-            '±': { selector: '#bars-per-row-selector', action: 'stepUp', trigger: true },
+            'ArrowRight': { selector: '#next-tab-button', action: 'click' },
+            'ArrowLeft': { selector: '#prev-tab-button', action: 'click' },
+            'ArrowUp': { selector: '#compactify-tab-button', action: 'click' },
+            'ArrowDown': { selector: '#compactify-tab-button', action: 'click' },
+            '—': { selector: '#bars-per-row-selector', action: 'stepDown' },
+            '±': { selector: '#bars-per-row-selector', action: 'stepUp' },
+            '⁄': { selector: '#bars-per-row-selector', value: 1 },
+            '€': { selector: '#bars-per-row-selector', value: 2 },
+            '‹': { selector: '#bars-per-row-selector', value: 3 },
+            '›': { selector: '#bars-per-row-selector', value: 4 },
+            'ﬁ': { selector: '#bars-per-row-selector', value: 5 },
+            'ﬂ': { selector: '#bars-per-row-selector', value: 6 },
+            '‡': { selector: '#bars-per-row-selector', value: 7 },
+            '°': { selector: '#bars-per-row-selector', value: 8 },
         }
 
         if (!shiftKey || !altKey || !(key in bindingByKey)) {
             return
         }
 
-        const binding = bindingByKey[key];
-        const actionBtnEl = document.querySelector(`${binding.selector}:not(.disabled)`);
+        const { selector, action, value } = bindingByKey[key]
+        const actionBtnEl = document.querySelector(`${selector}:not(.disabled)`)
         if (actionBtnEl) {
-            actionBtnEl[binding.action ?? 'click']()
-            if (binding.trigger) {
+            if (action) {
+                actionBtnEl[action]()
+            }
+            if (value) {
+                actionBtnEl.value = value
+            }
+            if (action !== 'click') {
                 actionBtnEl.dispatchEvent(new Event('change'))
             }
-            e.preventDefault();
+            e.preventDefault()
         }
     }
 
