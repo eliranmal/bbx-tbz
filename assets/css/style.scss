@@ -3,6 +3,8 @@
 
 @import "{{ site.theme }}";
 
+@import "fonts";
+
 
 $border-thin: .05rem solid #777;
 $fade-gradient: linear-gradient(to right, #fff, transparent 66%);
@@ -310,4 +312,76 @@ details {
 .disabled {
   pointer-events: none;
   opacity: .5;
+}
+
+
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: 'Icky Ticket Mono', sans-serif;
+  //font-family: 'Targa MS Hand', sans-serif;
+  //font-family: 'Targa MS', sans-serif;
+  //letter-spacing: .04em;
+  //letter-spacing: .02em;
+  line-height: 1.4;
+}
+
+pre, code {
+  line-height: 1.25;
+  //font-size: 1.05em;
+  letter-spacing: .04em;
+  font-family: 'Targa MS Hand', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Icky Ticket Mono', sans-serif;
+  //font-family: 'Targa MS Hand', sans-serif;
+  letter-spacing: -.02em;
+}
+
+h1 {
+  //font-family: 'Bestie Seventy', sans-serif;
+}
+
+.tab-wrapper {
+  h1, h2 {
+    //letter-spacing: 0;
+    text-transform: none;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h1 + h2 {
+    margin-top: -1.5em;
+    font-size: 1em;
+    //font-family: 'Bestie Seventy', sans-serif;
+    //letter-spacing: .07em;
+    text-transform: uppercase;
+  }
+}
+
+h1,
+h1 a:hover,
+h1 a:focus {
+  font-weight: 400;
+}
+
+header h1 {
+  font-family: 'Bestie Seventy', sans-serif;
+  letter-spacing: .045em;
+  font-size: 3.75rem;
+  line-height: 1.75;
+  margin-block-end: 0;
+
+  a:after {
+    font-size: 1.15em;
+    letter-spacing: .1em;
+    line-height: .25;
+  }
+}
+
+footer {
+  top: 280px;
 }
