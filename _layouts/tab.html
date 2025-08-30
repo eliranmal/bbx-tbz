@@ -357,11 +357,13 @@ layout: page
             // set data-attr on parent to prevent the metadata-overlay from scrolling with the child
             el.addEventListener('mouseover', ({target: {textContent, parentElement: tabBoxWrapperEl}}) => {
                 const tabBoxMetadata = resolveTabBoxMetadata(textContent)
-                tabBoxWrapperEl.setAttribute('data-tab-metadata', tabBoxMetadata)
+                tabBoxWrapperEl.setAttribute('data-tab-metadata-trigger', '')
+                document.body.setAttribute('data-tab-metadata', tabBoxMetadata)
             })
-            el.addEventListener('mouseout', ({target: {parentElement: tabBoxWrapperEl}}) => (
-                tabBoxWrapperEl.removeAttribute('data-tab-metadata')
-            ))
+            el.addEventListener('mouseout', ({target: {parentElement: tabBoxWrapperEl}}) => {
+                tabBoxWrapperEl.removeAttribute('data-tab-metadata-trigger')
+                document.body.removeAttribute('data-tab-metadata')
+            })
         })
     }
 

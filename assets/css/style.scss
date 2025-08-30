@@ -153,6 +153,9 @@ dl {
   }
 }
 
+
+// tablature boxes
+
 pre,
 code {
   line-height: 1.25;
@@ -186,54 +189,52 @@ pre {
   }
 }
 
-// tab-box overlay for metadata (e.g. beat division)
-pre[data-tab-metadata] {
-  position: relative;
-  cursor: pointer;
 
-  &:before,
+// tab-box overlay for metadata (e.g. beat division)
+
+[data-tab-metadata] {
   &:after {
-    position: absolute;
+    content: attr(data-tab-metadata);
+    position: fixed;
+    top: 3rem;
+    right: 4rem;
+    box-sizing: border-box;
+    display: block;
+    padding: .5rem 1rem;
+    border: $border-thin;
+    color: hotpink;
+    background-color: #fff;
+    font-family: $font-family;
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
     opacity: 0;
-    pointer-events: none;
   }
 
-  &:hover:before,
   &:active:after {
     opacity: 1;
   }
+}
+
+[data-tab-metadata-trigger] {
+  position: relative;
+  cursor: pointer;
 
   &:before {
     $button-size: 1rem;
     @include round-button($button-size, $button-size * .667, 0);
     content: 'i';
+    position: absolute;
     top: calc(50% - #{$button-size * .5});
     left: -#{$button-size * 1.5};
     z-index: 1;
     background-color: #aaaaaa;
     color: #fff;
   }
-
-  &:after {
-    content: attr(data-tab-metadata);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    padding: .5rem 1rem;
-    border-inline-start: $border-thin;
-    background-image: $fade-gradient-overlay;
-    color: #888888;
-    font-family: $font-family;
-    white-space: pre;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 }
 
+
+// tab action buttons
 
 .action-buttons {
   position: fixed;
@@ -256,6 +257,8 @@ pre[data-tab-metadata] {
   }
 }
 
+
+// index page expandable sections
 
 details {
   margin-block-end: 1rem;
