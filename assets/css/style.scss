@@ -3,6 +3,8 @@
 
 @import "{{ site.theme }}";
 
+@import "fonts";
+
 
 $border-thin: .05rem solid #777;
 $fade-gradient: linear-gradient(to right, #fff, transparent 66%);
@@ -42,12 +44,14 @@ $font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
 html {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 body {
   margin: 0;
   font-size: 1rem;
+  font-family: 'Icky Ticket Mono', sans-serif;
+  line-height: 1.4;
   background-color: #f2f2f2;
 }
 
@@ -57,6 +61,7 @@ a, a:hover, a:focus, a:active {
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1em;
+  font-family: 'Targa MS Hand', sans-serif;
   font-weight: 400;
   color: #888;
 }
@@ -90,18 +95,27 @@ header {
 
   // site title
   h1 {
-    line-height: .85;
-    font-size: 4rem;
-    margin-block-end: -.333rem;
+    font-family: 'Bestie Seventy', sans-serif;
+    letter-spacing: .045em;
+    font-size: 3.75rem;
+    line-height: 1.75;
+    margin-block-end: 0;
 
     // emojis watermark
     a:after {
       content: '🎤🥁🎵';
       display: block;
-      line-height: .45;
-      font-size: 1.35em;
+      font-size: 1.15em;
+      letter-spacing: .1em;
+      line-height: .2;
       filter: grayscale(1);
       opacity: .1;
+    }
+
+    &,
+    & a:hover,
+    & a:focus {
+      font-weight: 400;
     }
   }
 
@@ -109,11 +123,12 @@ header {
   > p {
     line-height: 1.2;
     font-variant: all-small-caps;
+    font-family: 'Targa MS Hand', sans-serif;
   }
 }
 
 footer {
-  top: 250px;
+  top: 280px;
 
   div {
     height: 100%;
@@ -136,6 +151,14 @@ dl {
       line-height: 1;
     }
   }
+}
+
+pre,
+code {
+  line-height: 1.25;
+  letter-spacing: .05em;
+  font-family: 'Targa MS Hand', sans-serif;
+  overflow-y: hidden;
 }
 
 pre {
@@ -282,6 +305,8 @@ details {
   h1 + h2 {
     // bring song title and artist subtitle closer together
     margin-top: -1em;
+    font-size: 1.2em;
+    text-transform: lowercase;
     color: #c9c9c9;
   }
 }
