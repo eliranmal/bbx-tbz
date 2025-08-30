@@ -27,6 +27,8 @@
   name: open hi-hat
 - symbol: f
   name: foot hi-hat
+- symbol: '*'
+  name: kiss hi-hat
 - symbol: d
   name: floor tom
 #- symbol: s
