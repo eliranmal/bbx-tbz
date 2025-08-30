@@ -18,7 +18,7 @@
 - symbol: x
   name: spit-snare
 - symbol: X
-  name: puffed spit-snare
+  name: puffy spit-snare
 - symbol: p
   name: p-snare
 - symbol: t
@@ -31,5 +31,7 @@
   name: kiss hi-hat
 - symbol: d
   name: floor tom
+- symbol: l
+  name: tongue snap
 #- symbol: s
 #  name: wat
