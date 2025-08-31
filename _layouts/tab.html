@@ -260,34 +260,14 @@ layout: page
         return (nonSpacerNotes / (compactTabChars.length / 100)).toFixed(2)
     }
 
-    /**
-     * rearrange lines according to available rows.
-     * to be used in conjunction with css text-overflow, to handle lines that are too long
-     */
-    function fitLinesToBlock(textLines, boundingRowCount) {
-        return textLines
-            .reduce((accum, term, index) => {
-                const metadataRowIndex = index % boundingRowCount
-                accum[metadataRowIndex] = accum[metadataRowIndex] ?? []
-                accum[metadataRowIndex].push(term)
-                return accum
-            }, [])
-            .map(metadataRow => metadataRow.join(', '))
-            .join('\n')
-    }
-
     function resolveTabBoxMetadata(rawTab) {
         const noteDensity = resolveTabNoteDensity(rawTab)
         const barResolution = resolveTabBarResolution(rawTab)
-
         const tabMetadata = [
             `beat division: 1/${barResolution}`,
             `note density: ${(noteDensity)}%`,
         ]
-
-        // rearrange metadata lines according to available rows in its tab box
-        const tabRows = splitLines(rawTab)
-        return fitLinesToBlock(tabMetadata, tabRows.length)
+        return tabMetadata.join('\n')
     }
 
     function toggleTabCompactMode() {
