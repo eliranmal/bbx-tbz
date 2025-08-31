@@ -312,6 +312,7 @@ layout: page
             'ArrowDown': { selector: '#compactify-tab-button', action: 'click' },
             '—': { selector: '#bars-per-row-selector', action: 'stepDown' },
             '±': { selector: '#bars-per-row-selector', action: 'stepUp' },
+            '‚': { selector: '#bars-per-row-selector', value: 0 },
             '⁄': { selector: '#bars-per-row-selector', value: 1 },
             '€': { selector: '#bars-per-row-selector', value: 2 },
             '‹': { selector: '#bars-per-row-selector', value: 3 },
@@ -332,7 +333,7 @@ layout: page
             if (action) {
                 actionBtnEl[action]()
             }
-            if (value) {
+            if (typeof value !== 'undefined') {
                 actionBtnEl.value = value
             }
             if (action !== 'click') {
