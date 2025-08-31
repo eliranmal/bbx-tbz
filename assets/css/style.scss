@@ -6,7 +6,9 @@
 @import "fonts";
 
 
-$border-thin: .05rem solid #777;
+$border-width: .085rem;
+$border-color: #ccc;
+$border-thin: $border-width solid $border-color;
 $fade-gradient: linear-gradient(to right, #fff, transparent 66%);
 $fade-gradient-overlay: linear-gradient(to right, #fff, #f2f2f2 66%);
 // taken from theme stylesheet, declared as var' for reuse
@@ -17,14 +19,14 @@ $font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
  * note: only use absolute units for $size (e.g. no 'em'),
  * as it's used both for font-size and box sizes
  */
-@mixin round-button($size, $font-size: $size * .3, $border-width: $size * .0125) {
+@mixin round-button($size, $font-size: $size * .3, $btn-border-width: $border-width) {
   box-sizing: content-box;
   display: block;
   width: $size;
   height: $size;
   padding: 0;
-  border: $border-width solid #777;
-  border-radius: ($size * .5) + $border-width;
+  border: $btn-border-width solid $border-color;
+  border-radius: ($size * .5) + $btn-border-width;
   font-size: $font-size;
   line-height: #{$size};
   text-align: center;
@@ -190,7 +192,7 @@ pre {
 }
 
 
-// tab-box overlay for metadata (e.g. beat division)
+// tab metadata
 
 [data-tab-metadata] {
   &:after {
@@ -200,7 +202,7 @@ pre {
     right: 4rem;
     box-sizing: border-box;
     display: block;
-    padding: .5rem 1rem;
+    padding: 1rem 1.5rem;
     border: $border-thin;
     color: hotpink;
     background-color: #fff;
@@ -242,9 +244,12 @@ pre {
   right: 4rem;
 
   > * {
-    @include round-button(3rem);
+    @include round-button(2.5rem);
     margin-block-start: 1rem;
     letter-spacing: -.05em;
+    font-family: 'Targa MS Hand', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
   }
 
   > input[type="checkbox"] {

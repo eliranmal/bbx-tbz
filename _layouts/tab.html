@@ -12,7 +12,7 @@ layout: page
         <input id="compactify-tab-button" type="checkbox"/>
         <label for="compactify-tab-button" title="
     &nbsp;&nbsp;&nbsp;toggle compact tabs&nbsp;&nbsp;&nbsp;
-">^ / v</label>
+">&#8213;</label>
 {% unless page.previous.url %}
     {% assign prevClassName = 'disabled' %}
 {% endunless %}
@@ -21,10 +21,10 @@ layout: page
 {% endunless %}
         <a href="{{ page.previous.url | relative_url }}" id="prev-tab-button" class="{{ prevClassName }}" title="
 &nbsp;&nbsp;&nbsp;previous&nbsp;&nbsp;&nbsp;
-">&lt;&ndash;</a>
+">&#10094;</a>
         <a href="{{ page.next.url | relative_url }}" id="next-tab-button" class="{{ nextClassName }}" title="
 &nbsp;&nbsp;&nbsp;next&nbsp;&nbsp;&nbsp;
-">&mdash;&gt;</a>
+">&#10095;</a>
     </div>
 </div>
 
