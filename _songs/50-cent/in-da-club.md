@@ -11,7 +11,7 @@ layout: tab
 
 ```
 |------t-------t-|t-----t-t-----t-|
-|-----k-k-----k--|-k---k---k---k--|
+|-----c-c-----c--|-c---c---c---c--|
 |----q-------q---|----q-------q---|
 |--b-------b----b|--b----b--b----b|
 ```
@@ -19,5 +19,5 @@ layout: tab
 <br/>
 
 <dl>
-    <dt><code>k</code></dt><dd>ghost note k-snares</dd>
+    <dt><code>c</code></dt><dd>ghost note k-snares</dd>
 </dl>
