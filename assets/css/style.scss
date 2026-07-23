@@ -181,12 +181,16 @@ pre {
     border-inline-start: $border-thin;
     background-image: $fade-gradient;
 
-    &.language-bbx-melody {
+    &[class^=language-bbx-melody] {
       padding-block: 0;
       margin-block-end: 8px;
       border-color: transparent;
       background-image: none;
       color: mediumpurple;
+
+      &:before {
+        content: attr(class);
+      }
     }
   }
 }

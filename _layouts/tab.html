@@ -97,7 +97,7 @@ layout: page
     }
 
     function isMelodyBoxEl(el) {
-        return el?.classList.contains('language-bbx-melody')
+        return el?.classList.find(cl => cl.includes('language-bbx-melody'))
     }
 
     function isBoxGroupHead(boxEl) {
@@ -183,6 +183,7 @@ layout: page
             range(groupTabBoxContents.length).map(boxIndex => {
                 if (groupMelodyBoxContents?.length) {
                     const melodyBoxContent = groupMelodyBoxContents[boxIndex];
+                    // todo - transfer custom melody-box classname that has the scale mode instead of hard-coding 'language-bbx-melody'
                     const melodyBoxWrapperEl = createBoxEl(melodyBoxContent, 'language-bbx-melody')
                     groupFirstBoxWrapperEl.insertAdjacentElement('beforebegin', melodyBoxWrapperEl)
                 }
@@ -205,7 +206,7 @@ layout: page
     }
 
     function applyTabCompactMode(isCompact) {
-        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre code:not(.language-bbx-melody)')]
+        const tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre code:not([class^=language-bbx-melody])')]
 
         tabBoxEls.map(el => {
             if (isCompact) {
@@ -238,7 +239,7 @@ layout: page
             // inject groups' data into the dom, with the new bar division
             renderBoxGroups(boxGroups, barCountPerRow);
             // recreate tab box event bindings on the newly spawned elements
-            const spawnedTabBoxEls = [...document.querySelectorAll('.tab-wrapper pre[data-spawned="true"] code:not(.language-bbx-melody)')]
+            const spawnedTabBoxEls = [...document.querySelectorAll('.tab-wrapper pre[data-spawned="true"] code:not([class^=language-bbx-melody])')]
             bindTabBoxListeners(spawnedTabBoxEls);
         }
 
@@ -354,7 +355,7 @@ layout: page
         document.addEventListener('keydown', handleActionButtonKeyboardBindings)
     }
 
-    function bindTabBoxListeners(tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code:not(.language-bbx-melody)')]) {
+    function bindTabBoxListeners(tabBoxEls = [...document.querySelectorAll('.tab-wrapper pre:not([data-spawned="true"]) code:not([class^=language-bbx-melody])')]) {
         bindTabBoxMetadataListeners(tabBoxEls)
     }
 

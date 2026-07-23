@@ -9,10 +9,10 @@ layout: tab
 
 <br/>
 
-```bbx-melody
-|        |/\      |
-|3 6   3 |6  6    |
-| 5 6   5| 6      |
+```bbx-melody=aeolian
+|        |/       |
+|5 8   5 |8  8    |
+| 7 8   7| 8      |
 ```
 
 ```
